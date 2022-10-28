@@ -1,0 +1,39 @@
+version: "3.7"
+services:
+    app:
+        build:
+            args:
+                user: apr
+                uid: 1000
+            context: ./docker-compose
+            dockerfile: Dockerfile
+        image: job-creator
+        restart: unless-stopped
+        working_dir: /var/www/
+        ports:
+            - 80:80
+        volumes:
+            - ./:/var/www
+        networks:
+            - aprimorha
+
+    db:
+        image: mysql:5.7
+        container_name: job-db
+        restart: unless-stopped
+        environment:
+            MYSQL_DATABASE: ${DB_DATABASE}
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_PASSWORD: ${DB_PASSWORD}
+            MYSQL_USER: ${DB_USERNAME}
+            SERVICE_TAGS: dev
+            SERVICE_NAME: mysql
+        volumes:
+            - ./docker-compose/mysql/data:/var/lib/mysql
+            - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+        networks:
+            - aprimorha
+
+networks:
+    aprimorha:
+        driver: bridge

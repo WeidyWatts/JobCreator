@@ -1,0 +1,34 @@
+.antialiased{
+      margin-top: 12em;
+}
+
+body{
+    background-image:url("/img/login_background.png") ;
+}
+
+.input_login{
+    border-radius: 5px; !important;
+    height: 4rem;
+    font-size: 1.5rem;
+}
+
+.btn-login{
+    color: #fff;
+    background-color: #FA7301;
+    width: 20rem
+}
+.text-login
+{
+    font-size: 450%;
+    color: #fff
+}
+
+.column-text-login{
+    margin-left: 5%;
+    margin-top: 3%;
+}
+
+.footer{
+    color: #e2e8f0;
+    margin-top: 6em;
+}
