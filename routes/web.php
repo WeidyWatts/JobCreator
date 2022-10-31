@@ -15,7 +15,7 @@ use App\Http\Controllers\ContaController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('dashboard');
 });
 
 Route::get('/dashboard', function () {
