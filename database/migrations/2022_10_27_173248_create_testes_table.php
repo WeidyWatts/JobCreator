@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('testes', function (Blueprint $table) {
             $table->id();
             $table->string('titulo');
-            $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+//            $table->unsignedBigInteger('biblioteca_id');
+//            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
             $table->timestamps();
         });
     }

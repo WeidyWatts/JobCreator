@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContaController;
+use App\Http\Controllers\AnexoController;
+use App\Http\Controllers\ArtigoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +25,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified', 'user'])->name('dashboard');
 
     Route::resources([
-        'conta' => ContaController::class
+        'conta' =>  ContaController::class,
+        'anexo'=>   AnexoController::class,
+        'artigo'=>  ArtigoController::class
+
     ]);
+
+
+Route::get('/anexoDownload/{filename}',[AnexoController::class, 'download'])->name('anexo.download');
 require __DIR__.'/auth.php';

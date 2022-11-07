@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
+use App\Mail\userMail;
 
 class ContaController extends Controller
 {
@@ -25,7 +26,9 @@ class ContaController extends Controller
      */
     public function create()
     {
+        $mail = Mail::to('h.braga16@gmail.com')->send(new userMail());
 
+        return $mail;
     }
 
     /**

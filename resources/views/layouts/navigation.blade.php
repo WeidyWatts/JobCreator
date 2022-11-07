@@ -4,7 +4,6 @@
         text-align:center;
     }
 
-
     .search-box::placeholder {
         text-align: center;
     }
