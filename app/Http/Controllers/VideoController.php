@@ -14,7 +14,8 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        $videos = Video::paginate(5);
+       return view('biblioteca.video.index',['videos'=>$videos]);
     }
 
     /**
@@ -35,7 +36,10 @@ class VideoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = Video::create($request->all());
+        if($data){
+            return redirect()->route('video.index');
+        }
     }
 
     /**
@@ -69,7 +73,12 @@ class VideoController extends Controller
      */
     public function update(Request $request, Video $video)
     {
-        //
+        $video->titulo = $request->titulo;
+        $video->link = $request->link;
+        $video->descricao = $request->descricao;
+        $video->save();
+
+        return redirect()->route('video.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class VideoController extends Controller
      */
     public function destroy(Video $video)
     {
-        //
+        $video->delete();
+        return redirect()->route('video.index');
     }
 }

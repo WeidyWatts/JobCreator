@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContaController;
 use App\Http\Controllers\AnexoController;
 use App\Http\Controllers\ArtigoController;
+use App\Http\Controllers\LinkController;
+use App\Http\Controllers\VideoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +28,10 @@ Route::get('/dashboard', function () {
 
     Route::resources([
         'conta' =>  ContaController::class,
-        'anexo'=>   AnexoController::class,
-        'artigo'=>  ArtigoController::class
+        'anexo' =>  AnexoController::class,
+        'artigo'=>  ArtigoController::class,
+        'link'  =>  LinkController::class,
+        'video' =>  VideoController::class
 
     ]);
 

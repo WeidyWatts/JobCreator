@@ -14,7 +14,8 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //
+        $links = Link::paginate(5);
+        return  view('biblioteca.link.index',['links'=>$links]);
     }
 
     /**
@@ -35,7 +36,10 @@ class LinkController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $link = Link::create($request->all());
+       if($link){
+           return redirect()->route('link.index');
+       }
     }
 
     /**
@@ -57,7 +61,7 @@ class LinkController extends Controller
      */
     public function edit(Link $link)
     {
-        //
+
     }
 
     /**
@@ -69,7 +73,12 @@ class LinkController extends Controller
      */
     public function update(Request $request, Link $link)
     {
-        //
+        $link->titulo = $request->titulo;
+        $link->link = $request->link;
+        $link->descricao = $request->descricao;
+        $link->save();
+
+        return redirect()->route('link.index');
     }
 
     /**
@@ -80,6 +89,7 @@ class LinkController extends Controller
      */
     public function destroy(Link $link)
     {
-        //
+       $link->delete();
+       return redirect()->route('link.index');
     }
 }
