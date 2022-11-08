@@ -1,0 +1,33 @@
+.action {
+    cursor: pointer;
+}
+
+.orange-color{
+    color: #FF7300;
+}
+
+.orange-color:hover {
+    color: #000;
+    cursor: pointer;
+}
+.cancelar {
+    color:#fff !important;
+    background-color: #3e3e3e!important;
+}
+
+.salvar {
+    color: #fff !important;
+    background-color: #FF7300 !important;
+}
+
+.action {
+    cursor: pointer;
+}
+
+.header-creator {
+    background-color: #FF7300;
+    color: #fff;
+    font-size: 150%;
+}
+
+

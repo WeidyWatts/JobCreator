@@ -8,7 +8,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header">links</h1>
+                <h1 class="card-header header-creator header header-creator-creator">Links</h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -18,7 +18,7 @@
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
                                     </div>
                                     <div class="col-md-3">
-                                        <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarlink">Adicionar Novo</button>
+                                        <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarlink">Adicionar Novo</button>
                                     </div>
                                 </div>
                             </div>
@@ -33,14 +33,14 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-md-6">
-                                                <h2>{{$link->descricao}}</h2>
+                                                <h2 class="orange-color">{{$link->descricao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="action mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
+                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
 
-                                                <a class="action mr-2" data-bs-toggle="modal" data-bs-target="#editarlink{{$link->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarlink{{$link->id}}"> <i class="fa fa-check"></i> editar </a>
 
-                                                <a class="action" data-bs-toggle="modal" data-bs-target="#deletarlink{{$link->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarlink{{$link->id}}"><i class="fa fa-trash"></i> excluir </a>
                                             </div>
                                         </div>
                                         <hr>
@@ -60,7 +60,7 @@
 <div class="modal fade" id="Adicionarlink" tabindex="-1" aria-labelledby="AdicionarlinkLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header header-creator header header-creator-creator">
                 <h5 class="modal-title" id="exampleModalLabel">Adicionar link</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
@@ -81,8 +81,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn salvar">Salvar</button>
             </div>
             </form>
         </div>
@@ -94,7 +94,7 @@
         <div class="modal fade" id="editarlink{{$link->id}}" tabindex="-1" aria-labelledby="editarlinkLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header header-creator header header-creator-creator">
                         <h5 class="modal-title" id="exampleModalLabel">Editar link</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
@@ -116,8 +116,8 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn salvar">Salvar</button>
                     </div>
                     </form>
                 </div>
@@ -132,7 +132,7 @@
         <div class="modal fade" id="deletarlink{{$link->id}}" tabindex="-1" aria-labelledby="deletarlinkLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header header-creator header header-creator-creator">
                         <h5 class="modal-title" id="exampleModalLabel">Excluir link</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
@@ -143,8 +143,8 @@
                             <h1>Deseja realmente Excluir {{$link->titulo}} ?</h1>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Deletar</button>
+                        <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn salvar">Deletar</button>
                     </div>
                     </form>
                 </div>

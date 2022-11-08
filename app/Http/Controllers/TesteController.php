@@ -14,7 +14,7 @@ class TesteController extends Controller
      */
     public function index()
     {
-        //
+       return view('biblioteca.teste.index');
     }
 
     /**

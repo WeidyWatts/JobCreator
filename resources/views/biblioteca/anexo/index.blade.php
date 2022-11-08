@@ -1,14 +1,12 @@
 <style>
-    .action {
-        cursor: pointer;
-    }
+
 </style>
 <x-app-layout>
 
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header">Anexos</h1>
+                <h1 class="card-header header-creator"><b>Anexos</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -18,7 +16,7 @@
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
                                     </div>
                                     <div class="col-md-3">
-                                        <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#AdicionarAnexo">Adicionar Novo</button>
+                                        <button class="btn mt-2 salvar"  data-bs-toggle="modal" data-bs-target="#AdicionarAnexo">Adicionar Novo</button>
                                     </div>
                                 </div>
                             </div>
@@ -32,15 +30,15 @@
                                             </div>
                                         </div>
                                         <div class="row mb-2">
-                                            <div class="col-md-6">
-                                                <a class="action" href="{{route('anexo.download',$anexo->arquivo_anexo)}}" target="_blank"> <h2>Fazer Download do Anexo</h2></a>
+                                            <div class="col-md-7">
+                                                <a class="orange-color" href="{{route('anexo.download',$anexo->arquivo_anexo)}}" target="_blank"> <h2>Fazer Download do Anexo</h2></a>
                                             </div>
-                                            <div class="col-md-6">
-                                                <a class="action mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
+                                            <div class="col-md-5">
+                                                <a class="mr-2 orange-color"> <i class="fa-regular fa-star"></i> salvar</a>
 
-                                                <a class="action mr-2" data-bs-toggle="modal" data-bs-target="#editarAnexo{{$anexo->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                <a class="mr-2 orange-color" data-bs-toggle="modal" data-bs-target="#editarAnexo{{$anexo->id}}"> <i class="fa fa-check"></i> editar </a>
 
-                                                <a class="action" data-bs-toggle="modal" data-bs-target="#deletarAnexo{{$anexo->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarAnexo{{$anexo->id}}"><i class="fa fa-trash"></i> excluir </a>
                                             </div>
                                         </div>
                                         <hr>
@@ -60,7 +58,7 @@
 <div class="modal fade" id="AdicionarAnexo" tabindex="-1" aria-labelledby="AdicionarAnexoLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header header-creator">
                 <h5 class="modal-title" id="exampleModalLabel">Adicionar Anexo</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
@@ -77,8 +75,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn salvar">Salvar</button>
             </div>
             </form>
         </div>
@@ -90,7 +88,7 @@
         <div class="modal fade" id="editarAnexo{{$anexo->id}}" tabindex="-1" aria-labelledby="editarAnexoLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header header-creator">
                         <h5 class="modal-title" id="exampleModalLabel">Editar Anexo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
@@ -108,8 +106,8 @@
                             </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn salvar">Salvar</button>
                     </div>
                     </form>
                 </div>
@@ -124,7 +122,7 @@
         <div class="modal fade" id="deletarAnexo{{$anexo->id}}" tabindex="-1" aria-labelledby="deletarAnexoLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header header-creator">
                         <h5 class="modal-title" id="exampleModalLabel">Excluir Anexo</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
@@ -135,8 +133,8 @@
                             <h1>Deseja realmente Excluir {{$anexo->titulo}} ?</h1>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Deletar</button>
+                        <button type="button"  class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn salvar">Deletar</button>
                     </div>
                     </form>
                 </div>

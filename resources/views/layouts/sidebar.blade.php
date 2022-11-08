@@ -41,7 +41,7 @@
                     <li>
                         <a href="#submenu1" data-bs-toggle="collapse" aria-expanded="true" class="nav-link px-0 align-middle dropdown-toggle ml-2">
                             <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca</span> </a>
-                        <ul class="@if(Route::current()->getName() == 'anexo.index' || Route::current()->getName() == 'artigo.index' || Route::current()->getName() == 'link.index' || Route::current()->getName() == 'video.index')
+                        <ul class="@if(Route::current()->getName() == 'anexo.index' || Route::current()->getName() == 'artigo.index' || Route::current()->getName() == 'link.index' || Route::current()->getName() == 'video.index' || Route::current()->getName() == 'teste.index')
                         collapse.show
                         @else
                         collapse
@@ -57,7 +57,7 @@
                                 <a href="{{route('link.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'link.index') ativo @endif"> <span class="d-none d-sm-inline">Links</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Testes</span></a>
+                                <a href="{{route('teste.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'teste.index') ativo @endif"> <span class="d-none d-sm-inline">Testes</span></a>
                             </li>
                             <li>
                                 <a href="{{route('video.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'video.index') ativo @endif"> <span class="d-none d-sm-inline">Videos</span></a>
