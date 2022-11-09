@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
@@ -17,7 +16,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             @if(isset($testes))
                                 @foreach($testes as $teste)
                                     <div class="item mb-4 action" data-bs-toggle="modal" data-bs-target="#showteste{{$teste->id}}">
@@ -59,45 +57,49 @@
                 <h5 class="modal-title" id="exampleModalLabel">Adicionar teste</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
-            <div class="modal-body d-flex justify-content-center">
-
-
-
-                <div class="card " style="width: 100%; background-color: #d7d7d7">
-                    <form action="{{route('teste.store')}}" method="POST">
-                        @csrf
-                        <div class="row mt-2">
-                            <div class="mb-1 col-md-8 " >
-                                <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" placeholder="Digite a questão" />
+            <div class="modal-body  justify-content-center">
+                <form id="form-add" action="{{route('teste.store')}}" method="POST">
+                    @csrf
+                    <div id="questao" class="mb-3 questao">
+                        <div class="card " style="width: 100%; background-color: #d7d7d7">
+                            <div class="row mt-2">
+                                <div class="mb-1 col-md-8 " >
+                                    <x-text-input id="titulo" style="width: 100%" type="text" name="titulo[]" placeholder="Digite a questão" />
+                                </div>
+                                <div class="mb-3 col-md-4">
+                                    <select class="form-select" id="tipoQuestao" style="width: 100%" name="tipo[]"  >
+                                        <option selected disabled>Tipo de questão</option>
+                                        <option value="1">Texo</option>
+                                        <option value="2">Multipla seleção</option>
+                                        <option value="3">Seleção Unica</option>
+                                    </select>
+                                </div>
                             </div>
-                            <div class="mb-1 col-md-4">
-                                <select class="form-select" style="width: 100%" >
-                                    <option selected disabled>Tipo de questão</option>
-                                    <option value="1">Texo</option>
-                                    <option value="2">Multipla seleção</option>
-                                    <option value="3">Seleção Unica</option>
-                                </select>
+                            <div class="row respostas">
+                                <div class="col-md-12 d-flex justify-content-arround">
+                                    <x-text-input id="resposta" class="mb-3" style="width: 90%" type="text" name="resposta[]" placeholder="resposta de texto" />
+                                    <button type="button" id="addOpcao" class="btn salvar ml-2 mr-2 mb-3"  style="display: none"><i class="fa fa-plus"></i> </button>
+                                </div>
+                                <div id="all-respostas" class="col-md-12">
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="m-2 col-md-12 d-flex justify-content-between">
+                                    <i class="fa fa-trash orange-color removeQuestao" style="font-size: 150%"></i>
+                                    <i class="fa fa-plus orange-color addQuestao"  style="font-size: 150%; margin-right: 2%;"></i>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="mb-3 col-md-12 d-flex justify-content-between">
-                                <x-text-input id="descricao" style="width: 90%" type="text" name="descricao" placeholder="resposta de texto" />
-                                <button class="btn salvar ml-2 mr-2"><i class="fa fa-plus"></i> </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
-
-
-
+                    </div>
+                    <div id="questoes" class="mt-3">
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
                 <button type="submit" class="btn salvar">Salvar</button>
             </div>
-
+            </form>
         </div>
     </div>
 </div>
@@ -139,7 +141,6 @@
     @endforeach
 @endif
 
-
 @if(isset($testes))
     @foreach($testes as $teste)
         <div class="modal fade" id="deletarteste{{$teste->id}}" tabindex="-1" aria-labelledby="deletartesteLabel" aria-hidden="true">
@@ -166,7 +167,6 @@
     @endforeach
 @endif
 
-
 @if(isset($testes))
     @foreach($testes as $teste)
         <div class="modal fade" id="showteste{{$teste->id}}" tabindex="-1" aria-labelledby="showtesteLabel" aria-hidden="true">
@@ -187,3 +187,47 @@
     @endforeach
 @endif
 
+<script>
+    $(document).ready(function() {
+        let contador = 1;
+
+        $('.addQuestao').click(function() {
+            contador ++;
+            let questao = $('#questao');
+            let questoes = $('#questoes')
+            let clone = questao.clone(true).prop('id', 'questao'+contador);
+            clone.appendTo(questoes);
+        });
+
+        $('.removeQuestao').click(function(){
+
+            if(contador > 1 && $(this).parent().parent().parent().parent().attr('id') != 'questao' ) {
+                $(this).parent().parent().parent().remove();
+                contador--;
+            }
+        });
+
+        $('#tipoQuestao').change(function(){
+            if($(this).val()!= 1){
+                $(this).parent().parent().siblings('div.row.respostas').find('#addOpcao').show();
+            }else {
+                $(this).parent().parent().siblings('div.row.respostas').find('#addOpcao').hide();
+                $('#all-respostas').children().remove();
+            }
+        })
+
+        $('#addOpcao').click(function (){
+            let resposta = $('#resposta');
+            let respostas = $(this).parent().parent().find('#all-respostas');
+            let clone = resposta.clone(true);
+            let lessButton = '<button type="button" class="btn btn-danger ml-2" id="lessOpcao"><i  class="fa fa-minus "></i></button>';
+            clone.appendTo(respostas);
+            respostas.append(lessButton);
+        })
+
+        $(document).on('click', '#lessOpcao', function(){
+            $(this).prev().remove();
+            $(this).remove();
+        })
+    })
+</script>
