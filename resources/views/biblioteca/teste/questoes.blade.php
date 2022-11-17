@@ -134,8 +134,6 @@
                         <h5 class="modal-title" id="exampleModalLabel">Adicionar Questão</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
-
-
                     <div class="modal-body  justify-content-center">
                         <form id="form-add" action="{{route('teste.questao.update',$questao_multi->id)}}" method="POST">
                             <input type="hidden" name="teste_id" value="{{$teste->id}}">
@@ -149,14 +147,12 @@
                                         </div>
                                         <div class="mb-3 col-md-4">
                                             <select class="form-select" id="tipoQuestao" style="width: 100%" disabled>
-                                                <option selected disabled>Tipo de questão</option>
+                                                <option disabled>Tipo de questão</option>
                                                 <option value="1">Texo</option>
                                                 <option selected value="2">Multipla Escolha</option>
                                             </select>
                                         </div>
                                     </div>
-
-
                                     <div class="row respostas">
                                         @php
                                         $cont = 0;
@@ -171,12 +167,10 @@
                                                 <button type="button" class="btn btn-danger ml-2 mr-2 mb-3" opcao_id="{{$opcao->id}}" id="DestroyOpcao"><i  class="fa fa-minus "></i></button>
                                             @endif
                                         </div>
-
                                             @php
                                                 $cont ++;
                                             @endphp
                                             @endforeach
-
                                         <div id="all-respostas-upd" class="col-md-12">
                                         </div>
 
@@ -199,30 +193,45 @@
 
 
 
-@if(isset($testes))
-    @foreach($testes as $teste)
-        <div class="modal fade" id="editarQuestao{{$teste->id}}" tabindex="-1" aria-labelledby="editarQuestaoLabel" aria-hidden="true">
-            <div class="modal-dialog">
+@if(isset($questoes))
+    @foreach($questoes as $questao)
+        <div class="modal fade" id="editarQuestao{{$questao->id}}" tabindex="-1" aria-labelledby="editarQuestaoLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header header-creator">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar teste</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Adicionar Questão</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
-                    <div class="modal-body">
-                        <form action="{{route('teste.update',$teste->id )}}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body  justify-content-center">
+                        <form id="form-add" action="{{route('teste.questao.update',$questao->id)}}" method="POST">
+                            <input type="hidden" name="teste_id" value="{{$teste->id}}">
+                            <input type="hidden" name="tipo" value="1">
                             @csrf
-                            @method('PUT')
-                            <div class="mb-3 col-md-10">
-                                <label for="titulo"  class="form-label">Titulo</label>
-                                <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$teste->titulo}}" />
+                            <div id="questao" class="mb-3 questao">
+                                <div class="card " style="width: 100%; background-color: #d7d7d7">
+                                    <div class="row mt-2">
+                                        <div class="mb-1 col-md-8 " >
+                                            <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$questao->enunciado}}" />
+                                        </div>
+                                        <div class="mb-3 col-md-4">
+                                            <select class="form-select" id="tipoQuestao" style="width: 100%" disabled>
+                                                <option disabled>Tipo de questão</option>
+                                                <option selected value="1">Texo</option>
+                                                <option  value="2">Multipla Escolha</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row respostas">
+                                            <div class="col-md-12 d-flex justify-content-arround">
+                                                <x-text-input id="resposta" class="mb-3 ml-2" style="width: 85%" type="text" name="opcao[]" placeholder="resposta de texto" value="{{$questao->resposta}}" required/>
+                                            </div>
+                                        <div id="all-respostas-upd" class="col-md-12">
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
-                            <div class="mb-3 col-md-10">
-                                <label for="link"  class="form-label">Link </label>
-                                <x-text-input id="link" style="width: 100%" type="text" name="link" value="{{$teste->link}}" />
-                            </div>
-                            <div class="mb-3 col-md-10">
-                                <label for="descricao"  class="form-label">Descricao </label>
-                                <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$teste->descricao}}" />
+                            <div id="questoes" class="mt-3">
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -235,6 +244,10 @@
         </div>
     @endforeach
 @endif
+
+{{-- FIM EDITAR QUESTOES --}}
+
+{{--  DELETAR QUESTOES --}}
 
 @if($questoes_multi)
     @foreach($questoes_multi as $questao_multi)
@@ -298,24 +311,7 @@
 
 <script>
     $(document).ready(function() {
-        let contador = 1;
-
-        $('.addQuestao').click(function() {
-            contador ++;
-            let questao = $('#questao');
-            let questoes = $('#questoes')
-            let clone = questao.clone(true).prop('id', 'questao'+contador);
-            clone.appendTo(questoes);
-        });
-
-        $('.removeQuestao').click(function(){
-
-            if(contador > 1 && $(this).parent().parent().parent().parent().attr('id') != 'questao' ) {
-                $(this).parent().parent().parent().remove();
-                contador--;
-            }
-        });
-
+    
         $('#tipoQuestao').change(function(){
             if($(this).val()!= 1){
                 if($(this).val() == 2) {

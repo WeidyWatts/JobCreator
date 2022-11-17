@@ -228,11 +228,11 @@ class TesteController extends Controller
 
 
         }else {
-            $questao_textc = questao_texto::create([
-                'enunciado' => $request->titulo,
-                'resposta'=> $request->opcao[0],
-                'teste_id'=> $request->teste_id
-            ]);
+            $questao_textc = questao_texto::find($id);
+            $questao_textc->enunciado = $request->titulo;
+            $questao_textc->resposta = $request->opcao[0];
+            $questao_textc->teste_id =$request->teste_id;
+            $questao_textc->save();
         }
 
         return redirect()->route('teste.show',$request->teste_id);
