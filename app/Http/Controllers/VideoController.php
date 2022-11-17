@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Video;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\userMail;
 
-class ContaController extends Controller
+class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,8 @@ class ContaController extends Controller
      */
     public function index()
     {
-      return view('conta.index');
+        $videos = Video::paginate(5);
+       return view('biblioteca.video.index',['videos'=>$videos]);
     }
 
     /**
@@ -26,9 +25,7 @@ class ContaController extends Controller
      */
     public function create()
     {
-        $mail = Mail::to('h.braga16@gmail.com')->send(new userMail());
-
-        return $mail;
+        //
     }
 
     /**
@@ -39,17 +36,19 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-
-
+        $data = Video::create($request->all());
+        if($data){
+            return redirect()->route('video.index');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Video $video)
     {
         //
     }
@@ -57,10 +56,10 @@ class ContaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Video $video)
     {
         //
     }
@@ -69,22 +68,28 @@ class ContaController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Video $video)
     {
-        //
+        $video->titulo = $request->titulo;
+        $video->link = $request->link;
+        $video->descricao = $request->descricao;
+        $video->save();
+
+        return redirect()->route('video.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Video  $video
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Video $video)
     {
-        //
+        $video->delete();
+        return redirect()->route('video.index');
     }
 }

@@ -31,7 +31,7 @@ class userMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'User Mail',
+            subject: 'Teste User Mail laravel account',
 
         );
     }

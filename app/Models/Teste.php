@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Teste extends Model
 {
+   protected $fillable = ['titulo', 'descricao'];
     use HasFactory;
 }

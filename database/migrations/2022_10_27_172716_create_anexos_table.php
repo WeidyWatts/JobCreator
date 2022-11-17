@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('arquivo_anexo');
             $table->string('titulo');
-            $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+//            $table->unsignedBigInteger('biblioteca_id');
+//            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
             $table->timestamps();
         });
     }

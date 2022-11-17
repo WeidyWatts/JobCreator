@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('opcao');
             $table->boolean('is_correct');
             $table->unsignedBigInteger('questao_id');
-            $table->foreign('questao_id')->references('id')->on('questao_multis');
+            $table->foreign('questao_id')->references('id')->on('questao_multis')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }
