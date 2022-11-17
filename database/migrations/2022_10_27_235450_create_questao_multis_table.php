@@ -16,9 +16,8 @@ return new class extends Migration
         Schema::create('questao_multis', function (Blueprint $table) {
             $table->id();
             $table->string('enunciado');
-            $table->boolean('multi_correct');
             $table->unsignedBigInteger('teste_id');
-            $table->foreign('teste_id')->references('id')->on('testes');
+            $table->foreign('teste_id')->references('id')->on('testes')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }

@@ -18,8 +18,8 @@ return new class extends Migration
             $table->string('titulo');
             $table->string('descricao');
             $table->string('link');
-            $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+//            $table->unsignedBigInteger('biblioteca_id');
+//            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
             $table->timestamps();
         });
     }

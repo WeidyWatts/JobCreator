@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('link');
             $table->string('autor');
             $table->string('ano_publicacao');
-            $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+//            $table->unsignedBigInteger('biblioteca_id');
+//            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
 
             $table->timestamps();
         });

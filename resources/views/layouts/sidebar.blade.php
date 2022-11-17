@@ -25,7 +25,7 @@
 
 <div class="container-fluid">
     <div class="row flex-nowrap" >
-        <div class="col-auto col-md-3 col-xl-2 bg-white">
+        <div class="col-auto col-md-3 col-xl-2 bg-white border">
             <div class="d-flex flex-column align-items-center align-items-sm-start pl-3 pt-2 text-white min-vh-100 sidebar-offcanvas" id="sidebar" role="navigation" >
 
                 <a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-gray-900 text-decoration-none">
@@ -39,24 +39,30 @@
                         </a>
                     </li>
                     <li>
-                        <a href="#submenu1" data-bs-toggle="collapse" class="nav-link px-0 align-middle dropdown-toggle ml-2">
+                        <a href="#submenu1" data-bs-toggle="collapse" aria-expanded="true" class="nav-link px-0 align-middle dropdown-toggle ml-2">
                             <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca</span> </a>
-                        <ul class="collapse  nav flex-column ml-5" id="submenu1" data-bs-parent="#menu">
+                        <ul class="@if(Route::current()->getName() == 'anexo.index' || Route::current()->getName() == 'artigo.index' || Route::current()->getName() == 'link.index' || Route::current()->getName() == 'video.index' || Route::current()->getName() == 'teste.index')
+                        collapse.show
+                        @else
+                        collapse
+                        @endif
+                        nav flex-column ml-5" id="submenu1" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Anexos</span> </a>
+                                <a href="{{route('anexo.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'anexo.index') ativo @endif"> <span class="d-none d-sm-inline">Anexos</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Artigos</span></a>
+                                <a href="{{route('artigo.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'artigo.index') ativo @endif"> <span class="d-none d-sm-inline">Artigos</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Links</span></a>
+                                <a href="{{route('link.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'link.index') ativo @endif"> <span class="d-none d-sm-inline">Links</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Testes</span></a>
+                                <a href="{{route('teste.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'teste.index') ativo @endif"> <span class="d-none d-sm-inline">Testes</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Videos</span></a>
+                                <a href="{{route('video.index')}}" class="nav-link px-0 @if(Route::current()->getName() == 'video.index') ativo @endif"> <span class="d-none d-sm-inline">Videos</span></a>
                             </li>
+
                         </ul>
                     </li>
                     <li>

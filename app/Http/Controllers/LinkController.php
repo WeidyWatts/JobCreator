@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Models\Link;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
-use App\Mail\userMail;
 
-class ContaController extends Controller
+class LinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +14,8 @@ class ContaController extends Controller
      */
     public function index()
     {
-      return view('conta.index');
+        $links = Link::paginate(5);
+        return  view('biblioteca.link.index',['links'=>$links]);
     }
 
     /**
@@ -26,9 +25,7 @@ class ContaController extends Controller
      */
     public function create()
     {
-        $mail = Mail::to('h.braga16@gmail.com')->send(new userMail());
-
-        return $mail;
+        //
     }
 
     /**
@@ -39,17 +36,19 @@ class ContaController extends Controller
      */
     public function store(Request $request)
     {
-
-
+       $link = Link::create($request->all());
+       if($link){
+           return redirect()->route('link.index');
+       }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Link $link)
     {
         //
     }
@@ -57,34 +56,40 @@ class ContaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Link $link)
     {
-        //
+
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(Request $request, Link $link)
     {
-        //
+        $link->titulo = $request->titulo;
+        $link->link = $request->link;
+        $link->descricao = $request->descricao;
+        $link->save();
+
+        return redirect()->route('link.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\Link  $link
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Link $link)
     {
-        //
+       $link->delete();
+       return redirect()->route('link.index');
     }
 }
