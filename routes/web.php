@@ -39,5 +39,10 @@ Route::group(['middleware'=>'auth'], function () {
     ]);
 });
 
+Route::post('teste/qustao',[TesteController::class, 'questaoStore'])->name('teste.questao.store');
+Route::post('teste/qustao/{id}',[TesteController::class, 'questaoUpdate'])->name('teste.questao.update');
+Route::post('teste/qustao/destroy',[TesteController::class, 'questaoDestroy'])->name('teste.questao.destroy');
+Route::get('teste/opcao/destroy/{id}',[TesteController::class, 'opcaoDestroy'])->name('teste.opcao.destroy');
+
 Route::get('/anexoDownload/{filename}',[AnexoController::class, 'download'])->name('anexo.download');
 require __DIR__.'/auth.php';

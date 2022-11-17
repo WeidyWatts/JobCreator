@@ -33,3 +33,12 @@
 .btn-add {
 
 }
+
+.link-rota:hover{
+    color: #000;
+}
+
+.check-questao {
+    height: 2rem;
+    width: 2rem;
+}

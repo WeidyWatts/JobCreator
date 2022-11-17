@@ -18,7 +18,7 @@
                             </div>
                             @if(isset($testes))
                                 @foreach($testes as $teste)
-                                    <div class="item mb-4 action" data-bs-toggle="modal" data-bs-target="#showteste{{$teste->id}}">
+                                    <div class="item mb-4 action" onclick="show({{$teste->id}})">
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <a href="{{$teste->link}}" class="action" target="_blank"><b>{{$teste->titulo}}</b></a>
@@ -51,48 +51,22 @@
 </x-app-layout>
 
 <div class="modal fade" id="Adicionarteste" tabindex="-1" aria-labelledby="AdicionartesteLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header header-creator">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar teste</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Editar teste</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
-            <div class="modal-body  justify-content-center">
-                <form id="form-add" action="{{route('teste.store')}}" method="POST">
+            <div class="modal-body">
+                <form action="{{route('teste.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div id="questao" class="mb-3 questao">
-                        <div class="card " style="width: 100%; background-color: #d7d7d7">
-                            <div class="row mt-2">
-                                <div class="mb-1 col-md-8 " >
-                                    <x-text-input id="titulo" style="width: 100%" type="text" name="titulo[]" placeholder="Digite a questão" />
-                                </div>
-                                <div class="mb-3 col-md-4">
-                                    <select class="form-select" id="tipoQuestao" style="width: 100%" name="tipo[]"  >
-                                        <option selected disabled>Tipo de questão</option>
-                                        <option value="1">Texo</option>
-                                        <option value="2">Multipla seleção</option>
-                                        <option value="3">Seleção Unica</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row respostas">
-                                <div class="col-md-12 d-flex justify-content-arround">
-                                    <x-text-input id="resposta" class="mb-3" style="width: 90%" type="text" name="resposta[]" placeholder="resposta de texto" />
-                                    <button type="button" id="addOpcao" class="btn salvar ml-2 mr-2 mb-3"  style="display: none"><i class="fa fa-plus"></i> </button>
-                                </div>
-                                <div id="all-respostas" class="col-md-12">
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="m-2 col-md-12 d-flex justify-content-between">
-                                    <i class="fa fa-trash orange-color removeQuestao" style="font-size: 150%"></i>
-                                    <i class="fa fa-plus orange-color addQuestao"  style="font-size: 150%; margin-right: 2%;"></i>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="mb-3 col-md-10">
+                        <label for="titulo"  class="form-label">Titulo</label>
+                        <x-text-input id="titulo" style="width: 100%" type="text" name="titulo"  />
                     </div>
-                    <div id="questoes" class="mt-3">
+                    <div class="mb-3 col-md-10">
+                        <label for="descricao"  class="form-label">Descricao </label>
+                        <x-text-input id="descricao" style="width: 100%" type="text" name="descricao"  />
                     </div>
             </div>
             <div class="modal-footer">
@@ -120,10 +94,6 @@
                             <div class="mb-3 col-md-10">
                                 <label for="titulo"  class="form-label">Titulo</label>
                                 <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$teste->titulo}}" />
-                            </div>
-                            <div class="mb-3 col-md-10">
-                                <label for="link"  class="form-label">Link </label>
-                                <x-text-input id="link" style="width: 100%" type="text" name="link" value="{{$teste->link}}" />
                             </div>
                             <div class="mb-3 col-md-10">
                                 <label for="descricao"  class="form-label">Descricao </label>
@@ -209,15 +179,22 @@
 
         $('#tipoQuestao').change(function(){
             if($(this).val()!= 1){
+                if($(this).val() == 2) {
+                    $(this).parent().parent().siblings('div.row.respostas').find('#resposta').attr('name', 'opcao-multi[]');
+                }
+                if($(this).val() == 3) {
+                    $(this).parent().parent().siblings('div.row.respostas').find('#resposta').attr('name', 'opcao-single[]');
+                }
                 $(this).parent().parent().siblings('div.row.respostas').find('#addOpcao').show();
             }else {
                 $(this).parent().parent().siblings('div.row.respostas').find('#addOpcao').hide();
+                $(this).parent().parent().siblings('div.row.respostas').find('#resposta').attr('name', 'resposta[]');
                 $('#all-respostas').children().remove();
             }
         })
 
         $('#addOpcao').click(function (){
-            let resposta = $('#resposta');
+            let resposta = $(this).prev();
             let respostas = $(this).parent().parent().find('#all-respostas');
             let clone = resposta.clone(true);
             let lessButton = '<button type="button" class="btn btn-danger ml-2" id="lessOpcao"><i  class="fa fa-minus "></i></button>';
@@ -230,4 +207,10 @@
             $(this).remove();
         })
     })
+
+
+
+    function show(id) {
+        window.location.href = '/teste/'+id;
+    }
 </script>

@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class questao_texto extends Model
 {
+    protected $fillable = ['enunciado', 'resposta', 'teste_id'];
     use HasFactory;
 }
