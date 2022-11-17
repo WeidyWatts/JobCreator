@@ -2,7 +2,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator">Testes</h1>
+                <h1 class="card-header header-creator"><b>Testes</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -29,7 +29,7 @@
                                                 <h2>{{$teste->descricao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="action mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
+                                                <a class="action mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
 
                                                 <a class="action mr-2" data-bs-toggle="modal" data-bs-target="#editarteste{{$teste->id}}"> <i class="fa fa-check"></i> editar </a>
 

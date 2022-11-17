@@ -311,7 +311,7 @@
 
 <script>
     $(document).ready(function() {
-    
+
         $('#tipoQuestao').change(function(){
             if($(this).val()!= 1){
                 if($(this).val() == 2) {

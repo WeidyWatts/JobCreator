@@ -8,7 +8,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator header header-creator-creator">Artigos</h1>
+                <h1 class="card-header header-creator header header-creator-creator"><b>Artigos</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -41,7 +41,7 @@
                                                 <h2  class="orange-color">{{$artigo->ano_publicacao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
+                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
 
                                                 <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarartigo{{$artigo->id}}"> <i class="fa fa-check"></i> editar </a>
 

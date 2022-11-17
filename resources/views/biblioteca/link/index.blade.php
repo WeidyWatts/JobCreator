@@ -8,7 +8,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator header header-creator-creator">Links</h1>
+                <h1 class="card-header header-creator header header-creator-creator"><b>Links</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -36,7 +36,7 @@
                                                 <h2 class="orange-color">{{$link->descricao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i>salvar</a>
+                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
 
                                                 <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarlink{{$link->id}}"> <i class="fa fa-check"></i> editar </a>
 
@@ -76,7 +76,7 @@
                         <x-text-input id="link" style="width: 100%" type="text" name="link" />
                     </div>
                     <div class="mb-3 col-md-10">
-                        <label for="descricao"  class="form-label">Descricao </label>
+                        <label for="descricao"  class="form-label">Descrição </label>
                         <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" />
                     </div>
             </div>
