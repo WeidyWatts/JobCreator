@@ -66,7 +66,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle ml-2 mb-3">
+                        <a href="{{route('journey.index')}}" class="nav-link px-0 align-middle ml-2 mb-3 @if(Route::current()->getName() == 'journey.index') ativo @endif">
                             <i class="fa fa-route"></i><span class="ms-1 d-none d-sm-inline">Minhas Journeys</span></a>
                     </li>
                 </ul>
