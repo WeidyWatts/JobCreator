@@ -96,4 +96,13 @@ class ArtigoController extends Controller
         $artigo->delete();
         return redirect()->route('artigo.index');
     }
+
+    public function getSelect2Json() {
+        $data = Artigo::get();
+        $select2 = [];
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->titulo];
+        }
+        return response()->json($select2);
+    }
 }

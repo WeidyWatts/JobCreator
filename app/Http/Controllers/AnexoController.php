@@ -125,4 +125,16 @@ class AnexoController extends Controller
         return response()->download($file_path);
     }
 
+
+    public function getSelect2Json() {
+        $data = Anexo::get();
+        $select2 = [];
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->titulo];
+        }
+        return response()->json($select2);
+    }
+
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Journey;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ModuloController;
 
 class JourneyController extends Controller
 {
@@ -48,7 +49,8 @@ class JourneyController extends Controller
      */
     public function show(journey $journey)
     {
-        //
+        $modulo = new ModuloController();
+      return $modulo->index($journey->id);
     }
 
     /**

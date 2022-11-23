@@ -20,7 +20,7 @@
 
                             @if(isset($journeys))
                                 @foreach($journeys as $journey)
-                                    <div class="item mb-4">
+                                    <div class="item mb-4" onclick="show({{$journey->id}})">
                                         <div class="row mb-2">
                                             <div class="col-md-6">
                                                 <a href="#" class="action" target="_blank"><b>{{$journey->titulo}}</b></a>

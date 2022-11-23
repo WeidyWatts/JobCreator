@@ -92,4 +92,13 @@ class LinkController extends Controller
        $link->delete();
        return redirect()->route('link.index');
     }
+
+    public function getSelect2Json() {
+        $data = Link::get();
+        $select2 = [];
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->titulo];
+        }
+        return response()->json($select2);
+    }
 }

@@ -92,4 +92,13 @@ class VideoController extends Controller
         $video->delete();
         return redirect()->route('video.index');
     }
+
+    public function getSelect2Json() {
+        $data = Video::get();
+        $select2 = [];
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->titulo];
+        }
+        return response()->json($select2);
+    }
 }

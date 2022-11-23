@@ -7,5 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Video_Modulo extends Model
 {
+    protected $fillable = ['modulo_id', 'video_id'];
+
     use HasFactory;
 }

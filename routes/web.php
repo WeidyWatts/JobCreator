@@ -8,6 +8,7 @@ use App\Http\Controllers\LinkController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\TesteController;
 use App\Http\Controllers\JourneyController;
+use App\Http\Controllers\ModuloController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,8 @@ Route::group(['middleware'=>'auth'], function () {
         'link'      => LinkController::class,
         'teste'     => TesteController::class,
         'video'     => VideoController::class,
-        'journey'   => JourneyController::class
+        'journey'   => JourneyController::class,
+        'modulo'    => ModuloController::class
 
     ]);
 
@@ -45,6 +47,11 @@ Route::group(['middleware'=>'auth'], function () {
     Route::post('teste/qustao/destroy',[TesteController::class, 'questaoDestroy'])->name('teste.questao.destroy');
     Route::get('teste/opcao/destroy/{id}',[TesteController::class, 'opcaoDestroy'])->name('teste.opcao.destroy');
     Route::get('/anexoDownload/{filename}',[AnexoController::class, 'download'])->name('anexo.download');
+    Route::get('/getAnexoJson', [AnexoController::class, 'getSelect2Json'])->name('anexo.getJson');
+    Route::get('/getArtigoJson', [ArtigoController::class, 'getSelect2Json'])->name('anexo.getJson');
+    Route::get('/getLinkJson', [LinkController::class, 'getSelect2Json'])->name('anexo.getJson');
+    Route::get('/getTesteJson', [TesteController::class, 'getSelect2Json'])->name('anexo.getJson');
+    Route::get('/getVideoJson', [VideoController::class, 'getSelect2Json'])->name('anexo.getJson');
 });
 
 

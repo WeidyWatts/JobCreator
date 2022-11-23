@@ -258,4 +258,13 @@ class TesteController extends Controller
         return 200;
     }
 
+    public function getSelect2Json() {
+        $data = Teste::get();
+        $select2 = [];
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->titulo];
+        }
+        return response()->json($select2);
+    }
+
 }
