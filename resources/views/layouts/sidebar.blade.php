@@ -87,13 +87,13 @@
                             <i class="fa-solid fa-handshake-angle"></i> <span class="ms-1 d-none d-sm-inline">Materias de Apoio</span> </a>
                         <ul class="collapse nav flex-column ml-5" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Meu Currículo</span></a>
+                                <a href="{{route('curriculo.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline @if(Route::current()->getName() == 'curriculo.index') ativo @endif">Meu Currículo</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Meu Networking</span></a>
+                                <a href="{{route('networking.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline @if(Route::current()->getName() == 'networking.index') ativo @endif">Meu Networking</span></a>
                             </li>
                             <li>
-                                <a href="#" class="nav-link px-0"> <span class="d-none d-sm-inline">Minha Entrevista</span></a>
+                                <a href="{{route('entrevista.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline @if(Route::current()->getName() == 'entrevista.index') ativo @endif">Minha Entrevista</span></a>
                             </li>
                         </ul>
                     </li>

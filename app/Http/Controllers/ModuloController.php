@@ -34,7 +34,8 @@ class ModuloController extends Controller
         $ToFront = [
             'modulos'=>$modulos,
             'journey_id'=>$id,
-            'anexos'=>$anexos,            'artigos'=>$artigos,
+            'anexos'=>$anexos,
+            'artigos'=>$artigos,
             'links'=>$links,
             'testes'=>$testes,
             'videos'=>$videos,
