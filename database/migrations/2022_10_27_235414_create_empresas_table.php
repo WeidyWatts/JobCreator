@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('cnpj');
             $table->string('nome_empresa');
+            $table->string('status');
+
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();

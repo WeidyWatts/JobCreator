@@ -2,7 +2,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator"><b>Anexos</b></h1>
+                <h1 class="card-header header-creator"><b>Times</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">

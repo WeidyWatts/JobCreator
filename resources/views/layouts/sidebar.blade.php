@@ -105,8 +105,8 @@
                 <ul class="nav nav-pills flex-column mb-0 align-items-center align-items-sm-start" id="menu">
                     @if(auth()->user()->user_type == 1)
                         <li>
-                        <a href="#" class="nav-link px-0 align-middle">
-                            <i class="fa-solid fa-user-gear"></i> <span class="ms-1 d-none d-sm-inline">Administração</span> </a>
+                        <a href="{{route('administracao.index')}}" class="nav-link px-0 align-middle  @if(Route::current()->getName() == 'administracao.index') ativo @endif">
+                            <i class="fa-solid fa-user-gear"></i> <span class="ms-1 d-none d-sm-inline ">Administração</span> </a>
                         </li>
 
                     <li>
@@ -120,12 +120,12 @@
                     </li>
                         @if(auth()->user()->user_type == 1)
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{route('monitoramento.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'monitoramento.index') ativo @endif">
                             <i class="fa-sharp fa-solid fa-chart-line"></i><span class="ms-1 d-none d-sm-inline">Monitoramento</span> </a>
                     </li>
 
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{route('times.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'times.index') ativo @endif">
                             <i class="fa-solid fa-users"></i> <span class="ms-1 d-none d-sm-inline">Times</span> </a>
                     </li>
                     @endif

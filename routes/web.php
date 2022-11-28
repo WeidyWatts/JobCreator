@@ -12,6 +12,9 @@ use App\Http\Controllers\ModuloController;
 use App\Http\Controllers\CurriculoController;
 use App\Http\Controllers\EntrevistaController;
 use App\Http\Controllers\NetworkingController;
+use App\Http\Controllers\AdministracaoController;
+use App\Http\Controllers\MonitoramentoController;
+use App\Http\Controllers\TimesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,7 +47,10 @@ Route::group(['middleware'=>'auth'], function () {
         'modulo'    => ModuloController::class,
         'curriculo' => CurriculoController::class,
         'entrevista' => EntrevistaController::class,
-        'networking' => NetworkingController::class
+        'networking' => NetworkingController::class,
+        'administracao' => AdministracaoController::class,
+        'monitoramento' => MonitoramentoController::class,
+        'times' => TimesController::class,
 
     ]);
 
