@@ -8,134 +8,65 @@
                         <div class="card p-3">
                             <div id="instrumentos" class="mb-4" >
                                 <div class="row">
-                                    <div class="col-md-9">
+                                    <div class="col-md-12">
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
-                                    </div>
-                                    <div class="col-md-3">
-                                        <button class="btn mt-2 salvar"  data-bs-toggle="modal" data-bs-target="#AdicionarAnexo">Adicionar Novo</button>
                                     </div>
                                 </div>
                             </div>
-
-                            @if(isset($anexos))
-                                @foreach($anexos as $anexo)
-                                    <div class="item mb-4">
-                                        <div class="row mb-2">
-                                            <div class="col-md-6">
-                                                <h1><b>{{$anexo->titulo}}</b></h1>
+                            @foreach($usuarios as $user)
+                                <div class="row">
+                                    <div class="card col-md-4" style="padding: 0;">
+                                        <div class="card-header">
+                                            <b>Nome: </b> {{$user->name}}
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="flex mb-3">
+                                                <div class="col-md-6">
+                                                    Primeiro acesso:
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ Carbon\Carbon::parse($user->primeiro_acesso)->format('d/m/Y') ?? ''}}
+                                                </div>
+                                            </div>
+                                            <div class="flex">
+                                                <div class="col-md-6">
+                                                    Último acesso:
+                                                </div>
+                                                <div class="col-md-6">
+                                                    {{ Carbon\Carbon::parse($user->ultimo_acesso)->format('d/m/Y') ?? ''}}
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-7">
-                                                <a class="orange-color" href="{{route('anexo.download',$anexo->arquivo_anexo)}}" target="_blank"> <h2>Fazer Download do Anexo</h2></a>
-                                            </div>
-                                            <div class="col-md-5">
-                                                <a class="mr-2 orange-color"> <i class="fa-regular fa-star"></i> salvar</a>
-
-                                                <a class="mr-2 orange-color" data-bs-toggle="modal" data-bs-target="#editarAnexo{{$anexo->id}}"> <i class="fa fa-check"></i> editar </a>
-
-                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarAnexo{{$anexo->id}}"><i class="fa fa-trash"></i> excluir </a>
-                                            </div>
-                                        </div>
-                                        <hr>
                                     </div>
-                                @endforeach
-                                {{ $anexos->links() }}
-                            @endif
+                                    <div class="card col-md-8" style="padding: 0;">
+                                        <div class="card-header">
+                                            <b>Journeys</b>
+                                        </div>
+                                        @foreach($user->journey as $jornada)
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        {{$jornada->titulo  ?? ''}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-orange" role="progressbar" style="width: {{$jornada->pivot->percentual_concluido ?? 00}}%" aria-valuenow="{{$jornada->pivot->percentual_concluido ?? 00}}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        {{$jornada->pivot->percentual_concluido  ?? 00}}%
+                                                    </div>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                            {{$usuarios->links() ?? ''}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </x-app-layout>
-
-<div class="modal fade" id="AdicionarAnexo" tabindex="-1" aria-labelledby="AdicionarAnexoLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header header-creator">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar Anexo</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('anexo.store')}}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <div class="mb-3 col-md-10">
-                        <label for="titulo"  class="form-label">Titulo do Anexo</label>
-                        <x-text-input id="name" style="width: 100%" type="text" name="titulo" />
-                    </div>
-                    <div class="mb-3">
-                        <label for="anexc" class="form-label">Anexo</label>
-                        <input type="file" name="anexo" class="form-control" required>
-                    </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
-                <button type="submit" class="btn salvar">Salvar</button>
-            </div>
-            </form>
-        </div>
-    </div>
-</div>
-
-@if(isset($anexos))
-    @foreach($anexos as $anexo)
-        <div class="modal fade" id="editarAnexo{{$anexo->id}}" tabindex="-1" aria-labelledby="editarAnexoLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header header-creator">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar Anexo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{route('anexo.update',$anexo->id )}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="mb-3 col-md-10">
-                                <label for="titulo"  class="form-label">Titulo do Anexo</label>
-                                <x-text-input id="name" style="width: 100%" type="text" name="titulo" value="{{$anexo->titulo}}" />
-                            </div>
-                            <div class="mb-3">
-                                <label for="anexc" class="form-label">Anexo</label>
-                                <input type="file" name="anexo" class="form-control">
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn salvar">Salvar</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    @endforeach
-@endif
-
-
-@if(isset($anexos))
-    @foreach($anexos as $anexo)
-        <div class="modal fade" id="deletarAnexo{{$anexo->id}}" tabindex="-1" aria-labelledby="deletarAnexoLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header header-creator">
-                        <h5 class="modal-title" id="exampleModalLabel">Excluir Anexo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{route('anexo.destroy',$anexo->id)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <h1>Deseja realmente Excluir {{$anexo->titulo}} ?</h1>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button"  class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn salvar">Deletar</button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-    @endforeach
-@endif

@@ -7,6 +7,8 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
+use Carbon\Carbon;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -31,6 +33,14 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
 
         $request->session()->regenerate();
+
+        $user = User::find(Auth::user()->id);
+        if(Auth::user()->primeiro_acesso == null) {
+            $user->primeiro_acesso = Carbon::now();
+            $user->save();
+        }
+        $user->ultimo_acesso = Carbon::now();
+        $user->save();
 
         return redirect()->intended(RouteServiceProvider::HOME);
     }

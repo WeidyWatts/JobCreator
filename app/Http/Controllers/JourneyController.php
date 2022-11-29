@@ -15,7 +15,8 @@ class JourneyController extends Controller
      */
     public function index()
     {
-        $journeys = Journey::paginate(5);
+        $journeys = Journey::with('modulos')->paginate(5);
+
         return view('journey.index', ['journeys'=>$journeys]);
     }
 

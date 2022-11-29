@@ -32,13 +32,13 @@ class ModuloController extends Controller
         }
 
         $ToFront = [
-            'modulos'=>$modulos,
-            'journey_id'=>$id,
-            'anexos'=>$anexos,
-            'artigos'=>$artigos,
-            'links'=>$links,
-            'testes'=>$testes,
-            'videos'=>$videos,
+            'modulos'=>$modulos ?? null,
+            'journey_id'=>$id ?? null,
+            'anexos'=>$anexos ?? null,
+            'artigos'=>$artigos ?? null,
+            'links'=>$links ?? null,
+            'testes'=>$testes ?? null,
+            'videos'=>$videos ?? null,
         ];
 
 

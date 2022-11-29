@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->timestamp('primeiro_acesso')->nullable();
+            $table->timestamp('ultimo_acesso')->nullable();
             $table->string('password');
             $table->integer('user_type'); //tipo de usuario sendo 1 - Administrador (super user) 2 - Empresa e 3 usuario comum.
             $table->rememberToken();

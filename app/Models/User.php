@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Journey_Usuario;
 
 class User extends Authenticatable
 {
@@ -22,6 +23,8 @@ class User extends Authenticatable
         'email',
         'password',
         'user_type',
+        'primeiro_acesso',
+        'ultimo_acesso',
     ];
 
     /**
@@ -42,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function journey()
+    {
+        return $this->belongsToMany(Journey::class, 'journey__usuarios','user_id', 'journey_id')->withPivot(['percentual_concluido']);
+    }
 }

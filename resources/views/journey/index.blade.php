@@ -28,12 +28,7 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-md-6">
-                                                <h2  class="orange-color"><i>10 modulos</i></h2>
-                                            </div>
-                                        </div>
-                                        <div class="row mb-2">
-                                            <div class="col-md-6">
-                                                <h2  class="orange-color">6 horas</h2>
+                                                <h2  class="orange-color"><i>{{count($journey->modulos)}} modulos</i></h2>
                                             </div>
                                             <div class="col-md-6">
                                                 <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>

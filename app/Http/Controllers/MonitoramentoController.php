@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class MonitoramentoController extends Controller
 {
@@ -13,7 +14,9 @@ class MonitoramentoController extends Controller
      */
     public function index()
     {
-        return view('administracao.monitoramento.index');
+          $user = User::with('journey')->paginate(5);
+
+        return view('administracao.monitoramento.index', ['usuarios'=>$user]);
     }
 
     /**
