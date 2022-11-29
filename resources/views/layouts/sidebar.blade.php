@@ -125,7 +125,7 @@
                     </li>
 
                     <li>
-                        <a href="{{route('times.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'times.index') ativo @endif">
+                        <a href="{{route('time.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'time.index') ativo @endif">
                             <i class="fa-solid fa-users"></i> <span class="ms-1 d-none d-sm-inline">Times</span> </a>
                     </li>
                     @endif

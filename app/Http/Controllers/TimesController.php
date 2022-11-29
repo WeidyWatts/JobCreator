@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\Time;
+use App\Models\Usuario_time;
 
 class TimesController extends Controller
 {
@@ -13,7 +16,8 @@ class TimesController extends Controller
      */
     public function index()
     {
-        return view('administracao.times.index');
+        $times = Time::with('users')->paginate(6);
+        return view('administracao.times.index',['times'=>$times]);
     }
 
     /**
@@ -34,7 +38,26 @@ class TimesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $time = Time::create([
+            'nome'=> $request->nome
+        ]);
+
+        foreach ($request->membros as $membro) {
+            Usuario_time::create([
+                'user_id'=>$membro,
+                'time_id'=>$time->id
+            ]);
+        }
+
+        if(isset($request->gerente)) {
+            Usuario_time::create([
+                'user_id'=>$request->gerente,
+                'time_id'=>$time->id
+            ]);
+        }
+
+        return redirect()->back();
     }
 
     /**
@@ -81,4 +104,25 @@ class TimesController extends Controller
     {
         //
     }
+
+    public function getSelect2Json() {
+        $data = User::get();
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->name];
+        }
+        return response()->json($select2);
+    }
+
+
+    public function getSelect2JsonGerente() {
+        $data = User::where('cargo', 'gerente')->get();
+        $select2 = [];
+
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->name];
+        }
+        return response()->json($select2);
+    }
+
+
 }

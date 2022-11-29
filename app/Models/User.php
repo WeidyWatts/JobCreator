@@ -25,6 +25,7 @@ class User extends Authenticatable
         'user_type',
         'primeiro_acesso',
         'ultimo_acesso',
+        'cargo',
     ];
 
     /**

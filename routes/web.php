@@ -50,7 +50,7 @@ Route::group(['middleware'=>'auth'], function () {
         'networking' => NetworkingController::class,
         'administracao' => AdministracaoController::class,
         'monitoramento' => MonitoramentoController::class,
-        'times' => TimesController::class,
+        'time' => TimesController::class,
 
     ]);
 
@@ -67,6 +67,8 @@ Route::group(['middleware'=>'auth'], function () {
     Route::get('/curriculoDownload/{filename}',[CurriculoController::class, 'download'])->name('curriculo.download');
     Route::get('/entrevistaDownload/{filename}',[EntrevistaController::class, 'download'])->name('entrevista.download');
     Route::get('/networkingDownload/{filename}',[NetworkingController::class, 'download'])->name('networking.download');
+    Route::get('/getUserTimeJson', [TimesController::class, 'getSelect2Json'])->name('user.time.getJson');
+    Route::get('/getUserTimeGerenteJson', [TimesController::class, 'getSelect2JsonGerente'])->name('user.time.getJsonGerente');
 
 });
 
