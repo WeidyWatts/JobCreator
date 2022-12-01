@@ -35,14 +35,19 @@ class AuthenticatedSessionController extends Controller
         $request->session()->regenerate();
 
         $user = User::find(Auth::user()->id);
-        if(Auth::user()->primeiro_acesso == null) {
-            $user->primeiro_acesso = Carbon::now();
-            $user->save();
-        }
-        $user->ultimo_acesso = Carbon::now();
-        $user->save();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+        if($user->status == 0) {
+            return redirect()->route('primeiro-acesso');
+        } else {
+            if (Auth::user()->primeiro_acesso == null) {
+                $user->primeiro_acesso = Carbon::now();
+                $user->save();
+            }
+            $user->ultimo_acesso = Carbon::now();
+            $user->save();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        }
     }
 
     /**

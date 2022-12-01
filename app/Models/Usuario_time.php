@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Usuario_time extends Model
 {
-    protected $fillable=['user_id', 'time_id'];
+    protected $fillable=['user_id', 'time_id', 'gerente'];
     use HasFactory;
 }

@@ -1,4 +1,5 @@
-<x-guest-layout class="login">
+<div class="font-sans antialiased">
+<x-guest-layout class="login ">
     <div class="container">
     <div class="flex justify-content-center align-items-center">
         <div class="flex-column mr-5">
@@ -36,3 +37,4 @@
     </div>
     </div>
 </x-guest-layout>
+</div>

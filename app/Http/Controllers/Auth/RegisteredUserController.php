@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Carbon\Carbon;
 
 class RegisteredUserController extends Controller
 {
@@ -50,6 +51,25 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
+        return redirect(RouteServiceProvider::HOME);
+    }
+
+    public function PrimeiroAcesso (){
+        return View('auth.altera_senha');
+    }
+
+
+    public function AlteraSenha (Request $request){
+
+        $request->validate([
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+        $user = User::find(Auth::user()->id);
+        $user->password = Hash::make($request->password);
+        $user->primeiro_acesso = Carbon::now();
+        $user->ultimo_acesso = Carbon::now();
+        $user->status = 1;
+        $user->save();
         return redirect(RouteServiceProvider::HOME);
     }
 }

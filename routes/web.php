@@ -15,6 +15,10 @@ use App\Http\Controllers\NetworkingController;
 use App\Http\Controllers\AdministracaoController;
 use App\Http\Controllers\MonitoramentoController;
 use App\Http\Controllers\TimesController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\JourneyRegistradaController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -50,7 +54,9 @@ Route::group(['middleware'=>'auth'], function () {
         'networking' => NetworkingController::class,
         'administracao' => AdministracaoController::class,
         'monitoramento' => MonitoramentoController::class,
-        'time' => TimesController::class,
+        'time'      => TimesController::class,
+        'usuario'   =>UsuarioController::class,
+        'journey-registrada'   =>JourneyRegistradaController::class,
 
     ]);
 
@@ -69,6 +75,13 @@ Route::group(['middleware'=>'auth'], function () {
     Route::get('/networkingDownload/{filename}',[NetworkingController::class, 'download'])->name('networking.download');
     Route::get('/getUserTimeJson', [TimesController::class, 'getSelect2Json'])->name('user.time.getJson');
     Route::get('/getUserTimeGerenteJson', [TimesController::class, 'getSelect2JsonGerente'])->name('user.time.getJsonGerente');
+    Route::get('/time/user/remove/{user_id}/{time_id}', [TimesController::class,'UserRemove'])->name('time.user.remove');
+
+    Route::get('primeiro-acesso', [RegisteredUserController::class, 'PrimeiroAcesso'])
+        ->name('primeiro-acesso');
+
+    Route::post('altera-senha', [RegisteredUserController::class, 'AlteraSenha'])
+        ->name('altera-senha');
 
 });
 

@@ -29,7 +29,7 @@ body {
 
     </head>
     <body >
-        <div class="font-sans antialiased">
+        <div class="font-sans">
             {{ $slot }}
         </div>
 

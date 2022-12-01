@@ -85,7 +85,7 @@
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle dropdown-toggle">
                             <i class="fa-solid fa-handshake-angle"></i> <span class="ms-1 d-none d-sm-inline">Materias de Apoio</span> </a>
-                        <ul class="collapse nav flex-column ml-5" id="submenu3" data-bs-parent="#menu">
+                        <ul class="@if(Route::current()->getName() == 'curriculo.index' || Route::current()->getName() == 'networking.index' || Route::current()->getName() == 'entrevista.index')collapse.show @else colapse @endif nav flex-column ml-5" id="submenu3" data-bs-parent="#menu">
                             <li class="w-100">
                                 <a href="{{route('curriculo.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline @if(Route::current()->getName() == 'curriculo.index') ativo @endif">Meu Currículo</span></a>
                             </li>
@@ -110,7 +110,7 @@
                         </li>
 
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{route('journey-registrada.index')}}" class="nav-link px-0 align-middle  @if(Route::current()->getName() == 'journey-registrada.index') ativo @endif">
                             <i class="fa-sharp fa-solid fa-map-location"></i> <span class="ms-1 d-none d-sm-inline">Journeys Registradas</span> </a>
                     </li>
                     @endif
@@ -131,7 +131,7 @@
                     @endif
                     @if(auth()->user()->user_type == 1|| auth()->user()->user_type == 2)
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{route('usuario.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'usuario.index') ativo @endif ">
                             <i class="fa fa-user"></i> <span class="ms-1 d-none d-sm-inline">Usuarios</span> </a>
                     </li>
                     @endif

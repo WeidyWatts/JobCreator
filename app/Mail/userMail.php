@@ -13,14 +13,21 @@ class userMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $senha;
+    public $email;
+    public $name;
+
+
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($senha,$email, $name)
     {
-        //
+        $this->senha = $senha;
+        $this->email = $email;
+        $this->name = $name;
     }
 
     /**
@@ -31,7 +38,7 @@ class userMail extends Mailable
     public function envelope()
     {
         return new Envelope(
-            subject: 'Teste User Mail laravel account',
+            subject: 'Job Creator - nova conta',
 
         );
     }
@@ -44,7 +51,12 @@ class userMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'conta.index',
+            view: 'mail.nova_conta.index',
+            with: [
+                'senha' => $this->senha,
+                'email'=> $this->email,
+                'name'=> $this->name,
+            ]
         );
     }
 

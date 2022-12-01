@@ -46,14 +46,16 @@ class TimesController extends Controller
         foreach ($request->membros as $membro) {
             Usuario_time::create([
                 'user_id'=>$membro,
-                'time_id'=>$time->id
+                'time_id'=>$time->id,
+                'gerente'   =>0
             ]);
         }
 
         if(isset($request->gerente)) {
             Usuario_time::create([
-                'user_id'=>$request->gerente,
-                'time_id'=>$time->id
+                'user_id'   =>$request->gerente,
+                'time_id'   =>$time->id,
+                'gerente'   =>1
             ]);
         }
 
@@ -89,9 +91,43 @@ class TimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Time $time)
     {
-        //
+        //dd($request);
+        $time->nome = $request->nome;
+        $time->save();
+
+
+        $atual = Usuario_time::where('time_id', $time->id)->get();
+        $novo = $request->membros;
+        foreach ($atual as $item) {
+            foreach ($novo as $k => $v){
+                if($item->user_id == $v){
+                    unset($novo[$k]);
+                }
+            }
+        }
+        foreach ($novo as $user) {
+            Usuario_time::create([
+                'user_id'   =>$user,
+                'time_id'   =>$time->id,
+                'gerente'   =>0
+            ]);
+        }
+
+        if(isset($request->gerente)){
+          $gerente_atual =  Usuario_time::where('time_id', $time->id)->where('gerente', '1')->first();
+          if($gerente_atual) {
+              $gerente_atual->delete();
+          }
+            Usuario_time::create([
+                'user_id'   =>$request->gerente,
+                'time_id'   =>$time->id,
+                'gerente'   =>1
+            ]);
+        }
+        return redirect()->back();
+
     }
 
     /**
@@ -100,9 +136,11 @@ class TimesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Time $time)
     {
-        //
+        $time->delete();
+        return redirect()->back();
+
     }
 
     public function getSelect2Json() {
@@ -122,6 +160,12 @@ class TimesController extends Controller
             $select2[] = ['id'=>$item->id, 'text' =>$item->name];
         }
         return response()->json($select2);
+    }
+
+    public function UserRemove($user_id, $time_id){
+        $ut = Usuario_time::where('user_id', $user_id)->where('time_id', $time_id)->first();
+        $ut->delete();
+        return 'Success';
     }
 
 
