@@ -83,7 +83,9 @@ Route::group(['middleware'=>'auth'], function () {
     Route::post('altera-senha', [RegisteredUserController::class, 'AlteraSenha'])
         ->name('altera-senha');
 
-});
+    Route::get('/monitoramento/getRelatorioJson/{empresaId}',[MonitoramentoController::class, 'getRelatorioJson'])->name('getRelatorioJson');
 
+
+});
 
 require __DIR__.'/auth.php';

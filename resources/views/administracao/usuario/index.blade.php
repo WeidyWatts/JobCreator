@@ -33,7 +33,7 @@
                                         <tr>
                                             <td>{{$usuario->name}}</td>
                                             <td>{{$usuario->email}}</td>
-                                            <td> {{ Carbon\Carbon::parse($usuario->ultimo_acesso)->format('d/m/Y') ?? ''}}   </td>
+                                            <td> {{$usuario->ultimo_acesso ? Carbon\Carbon::parse($usuario->ultimo_acesso)->format('d/m/Y') : '--'}}   </td>
                                             <td>{{$usuario->cargo}}</td>
                                             <td>@if($usuario->status == 1) Ativo @else Inativo @endif </td>
                                             <td>

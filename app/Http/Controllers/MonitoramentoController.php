@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Empresa;
 
 class MonitoramentoController extends Controller
 {
@@ -83,5 +84,24 @@ class MonitoramentoController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getRelatorioJson($empresa_id)
+    {
+
+        $users = [];
+        $colaboradores = Empresa::with('users')->where('id',$empresa_id)->get();
+            foreach ($colaboradores as $colaborador) {
+                if(isset($colaborador->users)) {
+                    foreach ($colaborador->users as $user) {
+                        if (isset($user->id)) {
+                            $users[] = $user->id;
+                        }
+                    }
+                }
+            }
+            $usuarios = User::with('journey')->whereIn('id',$users)->get();
+
+            return response()->json($usuarios);
     }
 }

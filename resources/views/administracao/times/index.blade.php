@@ -301,6 +301,7 @@
                 console.log('sucesso');
                 $('#user'+user_id).remove();
             }
-        });    }
+        });
+    }
 
 </script>

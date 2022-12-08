@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Mail\userMail;
+use App\Mail\Colaborador_Empresa;
 
 
 class UsuarioController extends Controller
@@ -42,7 +43,7 @@ class UsuarioController extends Controller
     {
         $password_temporario = $this->generatePassword();
 
-        User::create([
+       $user = User::create([
             'name'      => $request->name,
             'email'     => $request->email,
             'password'  => Hash::make($password_temporario),
@@ -50,6 +51,16 @@ class UsuarioController extends Controller
             'status'    => 0,
             'cargo'     =>$request->cargo,
         ]);
+
+        if(auth()->user()->user_type == 2) {
+            $empresa = Empresa::where('user_id',auth()->user()->id)->first();
+
+            Colaborador_Empresa::create([
+                'user_id'=> $user->id,
+                'empresa_id'=>$empresa->id
+            ]);
+
+        }
 
         $mail = Mail::to($request->email,)->send(new userMail($password_temporario, $request->email, $request->name ));
 

@@ -73,7 +73,7 @@
 
                     <hr>
 
-                <ul class="nav nav-pills flex-column mb-0 align-items-center align-items-sm-start" id="menu">
+                <ul class="nav nav-pills flex-column mb-0 align-items-center align-items-sm-start" id="menu1">
                     <li>
                         <a href="#" class="nav-link px-0 align-middle">
                             <i class="fa fa-plus"></i> <span class="ms-1 d-none d-sm-inline">Nova Pagina</span> </a>
@@ -85,7 +85,12 @@
                     <li>
                         <a href="#submenu3" data-bs-toggle="collapse" class="nav-link px-0 align-middle dropdown-toggle">
                             <i class="fa-solid fa-handshake-angle"></i> <span class="ms-1 d-none d-sm-inline">Materias de Apoio</span> </a>
-                        <ul class="@if(Route::current()->getName() == 'curriculo.index' || Route::current()->getName() == 'networking.index' || Route::current()->getName() == 'entrevista.index')collapse.show @else colapse @endif nav flex-column ml-5" id="submenu3" data-bs-parent="#menu">
+                        <ul class="@if(Route::current()->getName() == 'curriculo.index' || Route::current()->getName() == 'networking.index' || Route::current()->getName() == 'entrevista.index')
+                            collapse.show
+                            @else
+                            collapse
+                            @endif
+                            nav flex-column ml-5" id="submenu3" data-bs-parent="#menu1">
                             <li class="w-100">
                                 <a href="{{route('curriculo.index')}}" class="nav-link px-0"> <span class="d-none d-sm-inline @if(Route::current()->getName() == 'curriculo.index') ativo @endif">Meu Currículo</span></a>
                             </li>

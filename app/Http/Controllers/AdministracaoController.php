@@ -20,7 +20,6 @@ class AdministracaoController extends Controller
 
         $empresas = Empresa::paginate(10);
 
-
         return view('administracao.admin.index',['empresas'=>$empresas]);
     }
 
@@ -42,6 +41,11 @@ class AdministracaoController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        ]);
+
         $user = User::create([
             'name' => $request->name_empresa,
             'email' => $request->email,
