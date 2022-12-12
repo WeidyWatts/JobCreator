@@ -23,7 +23,7 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <a href="#" onclick="fac()"  style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;color:#000; background-color: #fff; border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px;
+    <a href="#" data-bs-toggle="modal" data-bs-target="#FAC" onclick="fac()"  style="position:fixed;width:60px;height:60px;bottom:40px;right:40px;color:#000; background-color: #fff; border-radius:50px;text-align:center;font-size:30px;box-shadow: 1px 1px 2px;
 z-index:1000;">
         <i style="margin-top:16px" class="fa fa-question"></i>
     </a>
@@ -43,7 +43,7 @@ z-index:900;">
             <div class="modal-body">
                 Como Podemos te ajudar?
                 <hr class="mb-3">
-                <form action="{{route('anexo.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('central-atendimento.send')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 col-md-10">
                         <label for="assunto"  class="form-label">Assunto</label>
@@ -62,6 +62,31 @@ z-index:900;">
         </div>
     </div>
 </div>
+
+
+
+
+<div class="modal fade" id="FAC" tabindex="-1" aria-labelledby="FACLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header header-creator">
+                <h5 class="modal-title" id="exampleModalLabel">FAC</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
+            </div>
+            <div class="modal-body">
+
+                <embed src="{{asset('img/slides/guia-acesso.pdf')}}"
+                       width="100%"
+                       height="700em">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn salvar" data-bs-dismiss="modal">OK </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 
 <script>
 

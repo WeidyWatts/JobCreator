@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
+use App\Models\Colaborador_Empresa;
 use App\Mail\userMail;
-use App\Mail\Colaborador_Empresa;
+use App\Mail\CentralAtendimentoMail;
+
 
 
 class UsuarioController extends Controller
@@ -126,5 +128,20 @@ class UsuarioController extends Controller
         $password = substr(str_shuffle($characters), 0, $qtyCaraceters);
 
         return $password;
+    }
+
+
+    public function centralAtendimento(Request $request){
+
+       $mensagem = $request->mensagem;
+       $email = auth()->user()->email;
+       $name = auth()->user()->name;
+       $assunto = $request->assunto;
+
+       $mail = Mail::to('h.braga16@gmail.com')->send(new CentralAtendimentoMail($mensagem, $email, $name, $assunto));
+
+       return redirect()->back();
+
+
     }
 }

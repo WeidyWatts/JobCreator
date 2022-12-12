@@ -85,6 +85,7 @@ Route::group(['middleware'=>'auth'], function () {
 
     Route::get('/monitoramento/getRelatorioJson/{empresaId}',[MonitoramentoController::class, 'getRelatorioJson'])->name('getRelatorioJson');
 
+    Route::post('central-atendimento', [UsuarioController::class, 'centralAtendimento'])->name('central-atendimento.send');
 
 });
 
