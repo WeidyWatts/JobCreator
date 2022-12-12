@@ -138,7 +138,7 @@ class UsuarioController extends Controller
        $name = auth()->user()->name;
        $assunto = $request->assunto;
 
-       $mail = Mail::to('h.braga16@gmail.com')->send(new CentralAtendimentoMail($mensagem, $email, $name, $assunto));
+       $mail = Mail::to('relacionamento@jobcreators.com.br')->send(new CentralAtendimentoMail($mensagem, $email, $name, $assunto));
 
        return redirect()->back();
 
