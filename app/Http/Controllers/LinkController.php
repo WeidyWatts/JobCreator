@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Link;
+use App\Models\usuario_f_link;
 use Illuminate\Http\Request;
 
 class LinkController extends Controller
@@ -15,7 +16,12 @@ class LinkController extends Controller
     public function index()
     {
         $links = Link::paginate(5);
-        return  view('biblioteca.link.index',['links'=>$links]);
+        $favoritos = [];
+        $link_fav = usuario_f_link::where('user_id', auth()->user()->id)->get();
+        foreach ($link_fav as $fav) {
+            $favoritos[]= $fav->link_id;
+        }
+        return  view('biblioteca.link.index',['links'=>$links, 'favoritos'=>$favoritos]);
     }
 
     /**

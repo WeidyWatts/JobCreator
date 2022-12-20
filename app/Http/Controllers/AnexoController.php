@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Anexo;
+use App\Models\usuario_f_anexo;
 use Illuminate\Http\Request;
 
 class AnexoController extends Controller
@@ -15,7 +16,14 @@ class AnexoController extends Controller
     public function index()
     {
         $anexos = Anexo::paginate(5);
-        return view('biblioteca.anexo.index',['anexos'=>$anexos]);
+
+        $favoritos = [];
+        $anexo_fav = usuario_f_anexo::where('user_id', auth()->user()->id)->get();
+        foreach ($anexo_fav as $fav) {
+            $favoritos[]= $fav->anexo_id;
+        }
+
+        return view('biblioteca.anexo.index',['anexos'=>$anexos, 'favoritos'=>$favoritos]);
     }
 
     /**

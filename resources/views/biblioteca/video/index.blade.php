@@ -20,10 +20,10 @@
 
                             @if(isset($videos))
                                 @foreach($videos as $video)
-                                    <div class="item mb-4 action" data-bs-toggle="modal" data-bs-target="#showvideo{{$video->id}}">
+                                    <div class="item mb-4 action" >
                                         <div class="row mb-2">
                                             <div class="col-md-6">
-                                                <a href="{{$video->link}}" class="action" target="_blank"><b>{{$video->titulo}}</b></a>
+                                                <a href="#" class="action" data-bs-toggle="modal" data-bs-target="#showvideo{{$video->id}}"><b>{{$video->titulo}}</b></a>
                                             </div>
                                         </div>
                                         <div class="row mb-2">
@@ -31,7 +31,7 @@
                                                 <h2 class="orange-color">{{$video->descricao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
+                                                <a class="mr-2 orange-color" id="video{{$video->id}}" onclick="favoritar({{$video->id}})">@if(in_array($video->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
 
                                                 <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarvideo{{$video->id}}"> <i class="fa fa-check"></i> editar </a>
 
@@ -169,3 +169,33 @@
     @endforeach
 @endif
 
+<script>
+
+    function favoritar(id){
+        console.log($('#video'+id).html())
+        if($('#video'+id).html() != '<i class="fa fa-star"></i> salvo '){
+
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::to('/favoritos') }}",
+                data:  {'tipo': 'video', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#video'+id).html('<i class="fa fa-star"></i> salvo ');
+                }
+            });
+        } else {
+            $.ajax({
+                type: "DELETE",
+                url: "{{ URL::to('/favoritos') }}/"+id,
+                data:  {'tipo': 'video', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#video'+id).html('<i class="fa-regular fa-star"></i> salvar ');
+                }
+            });
+
+        }
+
+    }
+
+
+</script>

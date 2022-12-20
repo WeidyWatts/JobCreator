@@ -30,7 +30,7 @@
                                                 <a class="orange-color" href="{{route('anexo.download',$anexo->arquivo_anexo)}}" target="_blank"> <h2>Fazer Download do Anexo</h2></a>
                                             </div>
                                             <div class="col-md-5">
-                                                <a class="mr-2 orange-color"> <i class="fa-regular fa-star"></i> salvar</a>
+                                                <a class="mr-2 orange-color" id="anexo{{$anexo->id}}" onclick="favoritar({{$anexo->id}})">@if(in_array($anexo->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
 
                                                 <a class="mr-2 orange-color" data-bs-toggle="modal" data-bs-target="#editarAnexo{{$anexo->id}}"> <i class="fa fa-check"></i> editar </a>
 
@@ -139,3 +139,34 @@
 
     @endforeach
 @endif
+
+<script>
+
+   function favoritar(id){
+        console.log($('#anexo'+id).html())
+       if($('#anexo'+id).html() != '<i class="fa fa-star"></i> salvo '){
+
+           $.ajax({
+               type: "POST",
+               url: "{{ URL::to('/favoritos') }}",
+               data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+               success: function(){
+                   $('#anexo'+id).html('<i class="fa fa-star"></i> salvo ');
+               }
+           });
+       } else {
+           $.ajax({
+               type: "DELETE",
+               url: "{{ URL::to('/favoritos') }}/"+id,
+               data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+               success: function(){
+                   $('#anexo'+id).html('<i class="fa-regular fa-star"></i> salvar ');
+               }
+           });
+
+       }
+
+    }
+
+
+</script>

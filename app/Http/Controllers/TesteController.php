@@ -6,6 +6,7 @@ use App\Models\opcao_multi;
 use App\Models\questao_multi;
 use App\Models\questao_texto;
 use App\Models\Teste;
+use App\Models\usuario_f_teste;
 use Illuminate\Http\Request;
 
 class TesteController extends Controller
@@ -18,7 +19,13 @@ class TesteController extends Controller
     public function index()
     {
         $teste = Teste::paginate(5);
-        return view('biblioteca.teste.index', ['testes'=>$teste]);
+        $favoritos = [];
+        $teste_fav = usuario_f_teste::where('user_id', auth()->user()->id)->get();
+        foreach ($teste_fav as $fav) {
+            $favoritos[]= $fav->teste_id;
+        }
+
+        return view('biblioteca.teste.index', ['testes'=>$teste, 'favoritos'=>$favoritos]);
     }
 
     /**
@@ -95,7 +102,9 @@ class TesteController extends Controller
      */
     public function destroy(Teste $teste)
     {
-        //
+        $teste->delete();
+
+        return redirect()->back();
     }
 
 

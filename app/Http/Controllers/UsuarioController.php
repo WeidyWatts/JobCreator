@@ -140,7 +140,7 @@ class UsuarioController extends Controller
 
        $mail = Mail::to('relacionamento@jobcreators.com.br')->send(new CentralAtendimentoMail($mensagem, $email, $name, $assunto));
 
-       return redirect()->back();
+       return redirect()->back()->with('success', 'Obrigado por sua mensagem , em breve retornaremos! fique de olho no seu e-mail.');
 
 
     }

@@ -57,3 +57,6 @@
 .altura-time {
     height: 10em;
 }
+.pointer {
+    cursor: pointer;
+}

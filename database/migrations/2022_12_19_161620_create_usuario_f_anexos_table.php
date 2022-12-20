@@ -13,13 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('testes', function (Blueprint $table) {
+        Schema::create('usuario_f_anexos', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
-            $table->string('descricao');
-            $table->string('link');
-//            $table->unsignedBigInteger('biblioteca_id');
-//            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('anexo_id');
+            $table->foreign('anexo_id')->references('id')->on('anexos');
             $table->timestamps();
         });
     }
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testes');
+        Schema::dropIfExists('usuario_f_anexos');
     }
 };

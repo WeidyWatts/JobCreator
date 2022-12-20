@@ -2,18 +2,20 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator header header-creator-creator"><b>Modulos</b></h1>
+                <h1 class="card-header header-creator header header-creator-creator"><b> {{$journey->titulo}}: Modulos</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
                             <div id="instrumentos" class="mb-4" >
-                                <div class="row">
+                                <div class="row flex justify-content-center">
                                     <div class="col-md-9">
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
                                     </div>
+                                    @if(auth()->user()->user_type != 3)
                                     <div class="col-md-3">
                                         <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarmodulo">Adicionar Modulo</button>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -30,11 +32,12 @@
                                                 <h2  class="orange-color">{{$anexos[$modulo->id]}} Anexos, {{$artigos[$modulo->id]}} Artigos,{{$links[$modulo->id]}} Links, {{$testes[$modulo->id]}} Testes, {{$videos[$modulo->id]}} Videos</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
+                                                <a href="/modulo/{{$modulo->id}}" class="orange-color mr-2"> <i class="fa-solid fa-play"></i> Acessar</a>
 
-                                                <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarmodulo{{$modulo->id}}"> <i class="fa fa-check"></i> editar </a>
-
-                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarmodulo{{$modulo->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                @if(auth()->user()->user_type != 3)
+                                                    <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarmodulo{{$modulo->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                    <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarmodulo{{$modulo->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                @endif
                                             </div>
                                         </div>
                                         <hr>
@@ -48,6 +51,7 @@
                 </div>
             </div>
         </div>
+    </div>
 </x-app-layout>
 
 
@@ -62,7 +66,7 @@
                 <div id="form-titulo">
                     <form id='modulo_store' action="{{route('modulo.store')}}" method="POST">
                         @csrf
-                        <input type="hidden" name="journey_id" value="{{$journey_id}}">
+                        <input type="hidden" name="journey_id" value="{{$journey->id}}">
                         <div class="mb-3 col-md-10">
                             <label for="titulo-add"  class="form-label">Titulo</label>
                             <x-text-input id="titulo-add" style="width: 100%" type="text" name="titulo" required />
@@ -70,53 +74,43 @@
                 </div>
                 <div id="form-conteudo" style="display: none;">
                     <div id="form-titulo">
-                            <input type="hidden" name="journey_id" value="{{$journey_id}}">
-                            <div class="my-3 col-md-10">
-                                <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Anexos:</span>
-                                <br>
-                                <select class="select_anexos" name="anexos[]" multiple="multiple" style="width: 25em;">
-                                </select>
-                            </div>
-                            <hr>
-                            <div class="my-3 col-md-10">
-                                <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Artigos:</span>
-                                <br>
-                                <select class="select_artigos" name="artigos[]" multiple="multiple" style="width: 25em;">
-                                </select>
-                            </div>
-                            <hr>
-                            <div class="my-3 col-md-10">
-                                <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Links:</span>
-                                <br>
-                                <select class="select_links" name="links[]" multiple="multiple" style="width: 25em;">
-                                </select>
-                            </div>
-                            <hr>
-                            <div class="my-3 col-md-10">
-                                <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Testes:</span>
-                                <br>
-                                <select class="select_testes" name="testes[]" multiple="multiple" style="width: 25em;">
-                                </select>
-                            </div>
-                            <hr>
-                            <div class="my-3 col-md-10">
-                                <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Videos:</span>
-                                <br>
-                                <select class="select_videos" name="states[]" multiple="multiple" style="width: 25em;">
-                                    <option value="AL">Alabama</option>
-                                    <option value="WY">Wyoming</option>
-                                    <option value="ds">nevada</option>
-                                    <option value="dfs">teste</option>
-                                    <option value="jygh">abcd</option>
-                                    <option value="oliuygh">testandigfdh</option>
-                                    <option value="dxcds">case if</option>
-                                </select>
-                            </div>
+                        <input type="hidden" name="journey_id" value="{{$journey->id}}">
+                        <div class="my-3 col-md-10">
+                            <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Anexos:</span>
+                            <br>
+                            <select class="select_anexos" name="anexos[]" multiple="multiple" style="width: 25em;">
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="my-3 col-md-10">
+                            <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Artigos:</span>
+                            <br>
+                            <select class="select_artigos" name="artigos[]" multiple="multiple" style="width: 25em;">
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="my-3 col-md-10">
+                            <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Links:</span>
+                            <br>
+                            <select class="select_links" name="links[]" multiple="multiple" style="width: 25em;">
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="my-3 col-md-10">
+                            <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Testes:</span>
+                            <br>
+                            <select class="select_testes" name="testes[]" multiple="multiple" style="width: 25em;">
+                            </select>
+                        </div>
+                        <hr>
+                        <div class="my-3 col-md-10">
+                            <ion-icon name="library"></ion-icon> <span class="ms-1 d-none d-sm-inline">Biblioteca >  Videos:</span>
+                            <br>
+                            <select class="select_videos" name="videos[]" multiple="multiple" style="width: 25em;">
+                            </select>
+                        </div>
                         </form>
                     </div>
-
-
-
 
                 </div>
             </div>
@@ -270,7 +264,7 @@
 
 
         $(document).on('click','#save', ()=>{
-          $('#modulo_store').submit();
+            $('#modulo_store').submit();
         });
 
     });

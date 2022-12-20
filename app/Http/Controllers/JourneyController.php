@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journey;
+use App\Models\Journey_Usuario;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ModuloController;
 
@@ -15,9 +16,26 @@ class JourneyController extends Controller
      */
     public function index()
     {
-        $journeys = Journey::with('modulos')->paginate(5);
 
-        return view('journey.index', ['journeys'=>$journeys]);
+        if(auth()->user()->user_type != 3){
+
+            $journeys = Journey::with('modulos')->paginate(5);
+
+            return view('journey.index', ['journeys'=>$journeys]);
+
+        } else {
+            $ids = [];
+            $ju = Journey_Usuario::where('user_id',auth()->user()->id)->get();
+
+            foreach ($ju as $j) {
+                $ids[] = $j->journey_id;
+            }
+                $journeys = Journey::with('modulos')->whereIn('id', $ids)->paginate(5);
+
+
+            return view('journey.index', ['journeys'=>$journeys]);
+        }
+
     }
 
     /**

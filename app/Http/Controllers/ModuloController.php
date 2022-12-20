@@ -8,6 +8,12 @@ use App\Models\Artigo_Modulo;
 use App\Models\Link_Modulo;
 use App\Models\Teste_Modulo;
 use App\Models\Video_Modulo;
+use App\Models\Journey;
+use App\Models\Anexo;
+use App\Models\Artigo;
+use App\Models\Link;
+use App\Models\Video;
+use App\Models\Teste;
 use Illuminate\Http\Request;
 
 class ModuloController extends Controller
@@ -19,21 +25,22 @@ class ModuloController extends Controller
      */
     public function index($id)
     {
-        $modulos = Modulo::where('journey_id',$id)->paginate(5);
+        $journey = Journey::find($id);
+
+        $modulos = Modulo::where('journey_id',$journey->id)->paginate(5);
 
         foreach ($modulos as $modulo) {
-         $anexos[$modulo->id] = Anexo_Modulo::where('modulo_id', $modulo->id)->count();
-         $artigos[$modulo->id] = Artigo_Modulo::where('modulo_id', $modulo->id)->count();
-         $links[$modulo->id] = Link_Modulo::where('modulo_id', $modulo->id)->count();
-         $testes[$modulo->id] = Teste_Modulo::where('modulo_id', $modulo->id)->count();
-         $videos[$modulo->id] = Video_Modulo::where('modulo_id', $modulo->id)->count();
-
+            $anexos[$modulo->id] = Anexo_Modulo::where('modulo_id', $modulo->id)->count();
+            $artigos[$modulo->id] = Artigo_Modulo::where('modulo_id', $modulo->id)->count();
+            $links[$modulo->id] = Link_Modulo::where('modulo_id', $modulo->id)->count();
+            $testes[$modulo->id] = Teste_Modulo::where('modulo_id', $modulo->id)->count();
+            $videos[$modulo->id] = Video_Modulo::where('modulo_id', $modulo->id)->count();
 
         }
 
         $ToFront = [
             'modulos'=>$modulos ?? null,
-            'journey_id'=>$id ?? null,
+            'journey'=>$journey ?? null,
             'anexos'=>$anexos ?? null,
             'artigos'=>$artigos ?? null,
             'links'=>$links ?? null,
@@ -64,9 +71,9 @@ class ModuloController extends Controller
     public function store(Request $request)
     {
 
-       $modulo = Modulo::create([
-           'titulo'=>$request->titulo,
-           'journey_id'=>$request->journey_id]);
+        $modulo = Modulo::create([
+            'titulo'=>$request->titulo,
+            'journey_id'=>$request->journey_id]);
 
         if(isset($request->anexos)){
             foreach ($request->anexos as $anexo){
@@ -74,17 +81,17 @@ class ModuloController extends Controller
                     'modulo_id' =>  $modulo->id,
                     'anexo_id'=> $anexo
                 ]);
-           }
+            }
         }
 
-       if(isset($request->artigos)){
-           foreach ($request->artigos as $artigo){
+        if(isset($request->artigos)){
+            foreach ($request->artigos as $artigo){
                 Artigo_Modulo::create([
-                   'modulo_id' =>  $modulo->id,
+                    'modulo_id' =>  $modulo->id,
                     'artigo_id'=> $artigo
                 ]);
-           }
-       }
+            }
+        }
 
         if(isset($request->links)){
             foreach ($request->links as $link){
@@ -122,9 +129,76 @@ class ModuloController extends Controller
      * @param  \App\Models\Modulo  $Modulo
      * @return \Illuminate\Http\Response
      */
-    public function show(Modulo $Modulo)
+    public function show(Modulo $modulo)
     {
-        //
+        $AnexoModuloIds = [];
+        $getAnexo = Anexo_Modulo::where('modulo_id', $modulo->id)->get();
+        foreach ($getAnexo as $i) {
+            $AnexoModuloIds[] = $i->anexo_id;
+        }
+        if(count($AnexoModuloIds) > 0) {
+            $anexo = Anexo::whereIn('id',$AnexoModuloIds)->get();
+        }else {
+            $anexo = [];
+        }
+
+
+        $ArtigoModuloIds = [];
+        $getArtigo = Artigo_Modulo::where('modulo_id', $modulo->id)->get();
+        foreach ($getArtigo as $it) {
+            $ArtigoModuloIds[] = $it->artigo_id;
+        }
+        if(count($ArtigoModuloIds) > 0) {
+            $artigo = Artigo::get();
+        }else {
+            $artigo = [];
+        }
+
+
+        $LinkModuloIds = [];
+        $getLink = Link_Modulo::where('modulo_id', $modulo->id)->get();
+        foreach ($getLink as $ite) {
+            $LinkModuloIds[] = $ite->link_id;
+        }
+        if(count($LinkModuloIds)>0) {
+            $link = Link::whereIn('id',$LinkModuloIds)->get();
+        }else {
+            $link = [];
+        }
+
+        $VideoModuloIds = [];
+        $getVideo = Video_Modulo::where('modulo_id', $modulo->id)->get();
+        foreach ($getVideo as $item) {
+            $VideoModuloIds[] = $item->video_id;
+        }
+        if(count($VideoModuloIds)>0) {
+            $video = Video::whereIn('id',$VideoModuloIds)->get();
+        } else {
+            $video = [];
+        }
+
+        $TesteModuloIds = [];
+        $getTeste = Teste_Modulo::where('modulo_id', $modulo->id)->get();
+        foreach ($getTeste as $item0) {
+            $TesteModuloIds[] = $item0->teste_id;
+        }
+        if(count($TesteModuloIds)>0) {
+            $teste = Teste::whereIn('id',$TesteModuloIds)->get();
+        } else {
+            $teste = [];
+        }
+
+
+        return view('journey.modulo.conteudos.index',
+            [
+                'modulo'    =>$modulo,
+                'anexos'    =>$anexo,
+                'artigos'   =>$artigo,
+                'links'     =>$link,
+                'videos'    =>$video,
+                'testes'    =>$teste
+            ]);
+
     }
 
     /**
@@ -147,7 +221,7 @@ class ModuloController extends Controller
      */
     public function update(Request $request, Modulo $Modulo)
     {
-        //
+        return redirect()->back();
     }
 
     /**

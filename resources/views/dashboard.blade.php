@@ -1,4 +1,12 @@
 <x-app-layout>
+    @if(Session::has('success'))
+        <div class="alert alert-success" role="alert">
+            {{Session::get('success')}}
+        </div>
+    @endif
+
+
+
     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"  data-interval="10">
         <div class="carousel-inner">
             <div class="carousel-item active">

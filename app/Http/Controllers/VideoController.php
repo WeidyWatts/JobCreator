@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Video;
+use App\Models\usuario_f_video;
 use Illuminate\Http\Request;
 
 class VideoController extends Controller
@@ -15,7 +16,13 @@ class VideoController extends Controller
     public function index()
     {
         $videos = Video::paginate(5);
-       return view('biblioteca.video.index',['videos'=>$videos]);
+        $favoritos = [];
+        $video_fav = usuario_f_video::where('user_id', auth()->user()->id)->get();
+        foreach ($video_fav as $fav) {
+            $favoritos[]= $fav->video_id;
+        }
+
+        return view('biblioteca.video.index',['videos'=>$videos, 'favoritos'=>$favoritos]);
     }
 
     /**

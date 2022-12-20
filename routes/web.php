@@ -18,6 +18,7 @@ use App\Http\Controllers\TimesController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\JourneyRegistradaController;
+use App\Http\Controllers\FavoritosController;
 
 
 /*
@@ -57,6 +58,7 @@ Route::group(['middleware'=>'auth'], function () {
         'time'      => TimesController::class,
         'usuario'   =>UsuarioController::class,
         'journey-registrada'   =>JourneyRegistradaController::class,
+        'favoritos' => FavoritosController::class,
 
     ]);
 

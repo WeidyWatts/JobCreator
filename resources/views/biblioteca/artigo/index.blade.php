@@ -41,7 +41,7 @@
                                                 <h2  class="orange-color">{{$artigo->ano_publicacao}}</h2>
                                             </div>
                                             <div class="col-md-6">
-                                                <a class="orange-color mr-2"> <i class="fa-regular fa-star"></i> salvar</a>
+                                                <a class="mr-2 orange-color" id="artigo{{$artigo->id}}" onclick="favoritar({{$artigo->id}})">@if(in_array($artigo->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
 
                                                 <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarartigo{{$artigo->id}}"> <i class="fa fa-check"></i> editar </a>
 
@@ -166,4 +166,31 @@
 
     @endforeach
 @endif
+<script>
 
+    function favoritar(id){
+        console.log($('#artigo'+id).html())
+        if($('#artigo'+id).html() != '<i class="fa fa-star"></i> salvo '){
+
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::to('/favoritos') }}",
+                data:  {'tipo': 'artigo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#artigo'+id).html('<i class="fa fa-star"></i> salvo ');
+                }
+            });
+        } else {
+            $.ajax({
+                type: "DELETE",
+                url: "{{ URL::to('/favoritos') }}/"+id,
+                data:  {'tipo': 'artigo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#artigo'+id).html('<i class="fa-regular fa-star"></i> salvar ');
+                }
+            });
+
+        }
+
+    }
+</script>

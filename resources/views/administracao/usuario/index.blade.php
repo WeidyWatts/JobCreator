@@ -66,11 +66,11 @@
                     @csrf
                     <div class="mb-3 col-md-10">
                         <label for="name"  class="form-label">Nome da Usuario</label>
-                        <x-text-input id="name" style="width: 100%" type="text" name="name" />
+                        <x-text-input id="name" style="width: 100%" type="text" name="name" required />
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="email"  class="form-label">Email</label>
-                        <x-text-input id="email" style="width: 100%" type="text" name="email" />
+                        <x-text-input id="email" style="width: 100%" type="text" name="email" required/>
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="cargo"  class="form-label">Cargo</label>

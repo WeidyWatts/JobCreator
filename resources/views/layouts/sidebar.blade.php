@@ -79,7 +79,7 @@
                             <i class="fa fa-plus"></i> <span class="ms-1 d-none d-sm-inline">Nova Pagina</span> </a>
                     </li>
                     <li>
-                        <a href="#" class="nav-link px-0 align-middle">
+                        <a href="{{route('favoritos.index')}}" class="nav-link px-0 align-middle @if(Route::current()->getName() == 'favoritos.index') ativo @endif">
                             <i class="fa fa-star"></i> <span class="ms-1 d-none d-sm-inline">Meus Favoritos</span> </a>
                     </li>
                     <li>
