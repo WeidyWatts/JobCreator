@@ -30,7 +30,7 @@
                                         </div>
                                         <div class="row mb-2">
                                             <div class="col-md-6">
-                                                <a href="/journey/{{$journey->id}}" class="orange-color"><i>{{count($journey->modulos)}} modulos</i></a>
+                                                <a href="/journey/{{$journey->id}}" class="orange-color"><i> @if(count($journey->modulos) == 0 ) Nenhum Módulo @elseif(count($journey->modulos) == 1) 1 Módulo @else {{count($journey->modulos)}}  Módulos @endif</i></a>
                                             </div>
                                             <div class="col-md-6">
                                                 @if(auth()->user()->user_type != 3)
@@ -64,7 +64,7 @@
                 <div class="modal-body">
                     <form action="{{route('journey.store')}}" method="POST">
                         @csrf
-                        <div class="mb-3 col-md-10">
+                        <div class="mb-3">
                             <label for="titulo"  class="form-label">Titulo</label>
                             <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" required />
                         </div>

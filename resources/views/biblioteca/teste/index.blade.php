@@ -51,28 +51,31 @@
 </x-app-layout>
 
 <div class="modal fade" id="Adicionarteste" tabindex="-1" aria-labelledby="AdicionartesteLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header header-creator">
                 <h5 class="modal-title" id="exampleModalLabel">Adicionar Teste</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body ">
                 <form action="{{route('teste.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <div class="mb-3 col-md-10">
+
+                    <div class="flex-row">
                         <label for="titulo"  class="form-label">Titulo</label>
                         <x-text-input id="titulo" style="width: 100%" type="text" name="titulo"  />
                     </div>
-                    <div class="mb-3 col-md-10">
+
+                    <div class="flex-row">
                         <label for="descricao"  class="form-label">Descricao </label>
                         <x-text-input id="descricao" style="width: 100%" type="text" name="descricao"  />
                     </div>
 
-                    <div class="mb-3 col-md-10">
+                    <div class="flex-row">
                         <label for="descricao"  class="form-label">Link </label>
                         <x-text-input id="link" style="width: 100%" type="text" name="link"  />
                     </div>
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>
@@ -89,22 +92,22 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header header-creator">
-                        <h5 class="modal-title" id="exampleModalLabel">Editar teste</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editar Teste</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
                     <div class="modal-body">
                         <form action="{{route('teste.update',$teste->id )}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="mb-3 col-md-10">
+                            <div class="flex-row">
                                 <label for="titulo"  class="form-label">Titulo</label>
                                 <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$teste->titulo}}" />
                             </div>
-                            <div class="mb-3 col-md-10">
+                            <div class="flex-row">
                                 <label for="descricao"  class="form-label">Descricao </label>
                                 <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$teste->descricao}}" />
                             </div>
-                            <div class="mb-3 col-md-10">
+                            <div class="flex-row">
                                 <label for="descricao"  class="form-label">Link </label>
                                 <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$teste->link}}" />
                             </div>
@@ -126,7 +129,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header header-creator">
-                        <h5 class="modal-title" id="exampleModalLabel">Excluir teste</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Excluir Teste</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
                     </div>
                     <div class="modal-body">

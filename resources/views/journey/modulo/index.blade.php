@@ -2,7 +2,10 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator header header-creator-creator"><b> {{$journey->titulo}}: Modulos</b></h1>
+                <h1 class="card-header header-creator header header-creator-creator flex justify-content-between">
+                    <b> Journey: {{$journey->titulo}} - modulos</b>
+                <a href="{{route('journey.index')}}" class="back"><i class="fa-solid fa-arrow-left"></i></a>
+                </h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">

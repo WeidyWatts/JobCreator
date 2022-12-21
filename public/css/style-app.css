@@ -60,3 +60,10 @@
 .pointer {
     cursor: pointer;
 }
+
+.back {
+cursor: pointer;
+}
+.back:hover {
+    color: gray;
+}

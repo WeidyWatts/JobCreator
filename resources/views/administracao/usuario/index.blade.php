@@ -2,7 +2,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator"><b>Usuarios</b></h1>
+                <h1 class="card-header header-creator"><b>Usários</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -37,8 +37,7 @@
                                             <td>{{$usuario->cargo}}</td>
                                             <td>@if($usuario->status == 1) Ativo @else Inativo @endif </td>
                                             <td>
-                                                <i class="fa fa-pen" aria-hidden="true"></i>
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <i class="fa fa-trash pointer" data-bs-toggle="modal" data-bs-target="#deletarUsuario{{$usuario->id}}" aria-hidden="true"></i>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -133,7 +132,7 @@
                         <form action="{{route('usuario.destroy',$usuario->id)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <h1>Deseja realmente Excluir {{$usuario->nome_usuario}} ?</h1>
+                            <h1>Deseja realmente Excluir <b>{{$usuario->name}}</b> ?</h1>
                     </div>
                     <div class="modal-footer">
                         <button type="button"  class="btn cancelar" data-bs-dismiss="modal">Cancelar</button>

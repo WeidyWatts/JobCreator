@@ -106,8 +106,13 @@ class AdministracaoController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Empresa $empresa)
+    public function destroy($id)
     {
-        //
+       $empresa = Empresa::find($id);
+       $user = $empresa->user_id;
+        $empresa->delete();
+        User::where('id',$user)->delete();
+        return redirect()->back();
+
     }
 }

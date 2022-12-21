@@ -39,7 +39,7 @@
                                                         <div class="col-md-8">
                                                             Total de inscritos
                                                         </div>
-                                                        <div class="col-md-2" style="background-color: grey">
+                                                        <div class="col-md-2 d-flex justify-content-center" style="background-color: grey">
                                                             {{count($journey->users)}}
                                                         </div>
                                                     </div>
@@ -50,7 +50,7 @@
                                                         <div class="col-md-8">
                                                             Em Execução
                                                         </div>
-                                                        <div class="col-md-2" style="background-color: yellow">
+                                                        <div class="col-md-2 d-flex justify-content-center" style="background-color: yellow">
                                                             @php
                                                                 $exec = 0;
                                                             @endphp
@@ -70,7 +70,7 @@
                                                         <div class="col-md-8">
                                                             Concluido
                                                         </div>
-                                                        <div class="col-md-2" style="background-color: greenyellow">
+                                                        <div class="col-md-2 d-flex justify-content-center" style="background-color: greenyellow">
                                                             @php
                                                                 $conc = 0;
                                                             @endphp

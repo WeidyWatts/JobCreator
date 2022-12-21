@@ -5,7 +5,7 @@
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
             <div class="card">
-                <h1 class="card-header header-creator"><b>Administracao</b></h1>
+                <h1 class="card-header header-creator"><b>Administração</b></h1>
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
@@ -38,8 +38,8 @@
                                             <td><i class="fa fa-file pointer"  data-bs-toggle="modal" data-bs-target="#RelatorioEmpresa{{$empresa->id}}" onclick="relatorio({{$empresa->id}})"  aria-hidden="true"></i></td>
                                             <td>{{$empresa->status}}</td>
                                             <td>
-                                                <i class="fa fa-pen" aria-hidden="true"></i>
-                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                                <i class="fa fa-pen pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#editarEmpresa{{$empresa->id}}" ></i>
+                                                <i class="fa fa-trash pointer" aria-hidden="true" data-bs-toggle="modal" data-bs-target="#deletarEmpresa{{$empresa->id}}" ></i>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -67,16 +67,16 @@
                     @csrf
                     <div class="mb-3 col-md-10">
                         <label for="name_empresa"  class="form-label">Nome da Empresa</label>
-                        <x-text-input id="name_empresa" style="width: 100%" type="text" name="name_empresa" required :value="old('name_empresa')"/>
+                        <x-text-input id="name_empresa" style="width: 100%" type="text" name="name_empresa" required :value="old('name_empresa')" required/>
                         <x-input-error :messages="$errors->get('name_empresa')" class="mt-2" />
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="cnpj"  class="form-label">CNPJ</label>
-                        <x-text-input id="cnpj" style="width: 100%" type="text" name="cnpj" :value="old('cnpj')" />
+                        <x-text-input id="cnpj" style="width: 100%" type="text" name="cnpj" :value="old('cnpj')" required />
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="email"  class="form-label">Email do Responsável</label>
-                        <x-text-input id="email" style="width: 100%" type="text" name="email" :value="old('email')" />
+                        <x-text-input id="email" style="width: 100%" type="text" name="email" :value="old('email')" required/>
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
             </div>
@@ -102,13 +102,14 @@
                         <form action="{{route('administracao.update',$empresa->id )}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <div class="mb-3 col-md-10">
-                                <label for="titulo"  class="form-label">Titulo do Empresa</label>
-                                <x-text-input id="name" style="width: 100%" type="text" name="titulo" value="{{$empresa->nome_empresa}}" />
+                            <div class="mb-3 ">
+                                <label for="name_empresa"  class="form-label">Nome da Empresa</label>
+                                <x-text-input id="name_empresa" style="width: 100%" type="text" name="name_empresa" required value="{{$empresa->nome_empresa}}" required/>
+                                <x-input-error :messages="$errors->get('name_empresa')" class="mt-2" />
                             </div>
-                            <div class="mb-3">
-                                <label for="anexc" class="form-label">Empresa</label>
-                                <input type="file" name="empresa" class="form-control">
+                            <div class="mb-3 ">
+                                <label for="cnpj"  class="form-label">CNPJ</label>
+                                <x-text-input id="cnpj" style="width: 100%" type="text" name="cnpj" value="{{$empresa->cnpj}}" required/>
                             </div>
                     </div>
                     <div class="modal-footer">
