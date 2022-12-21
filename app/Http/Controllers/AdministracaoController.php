@@ -51,6 +51,7 @@ class AdministracaoController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->cnpj),
             'user_type'=>2,
+            'status'=>2
         ]);
         event(new Registered($user));
         $empresa = Empresa::create([

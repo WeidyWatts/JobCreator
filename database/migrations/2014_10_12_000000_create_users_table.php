@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('cargo')->nullable();
+            $table->string('image')->default('none');;
             $table->tinyInteger('status')->default('1');  // 1- Ativo  // 2 - inativo
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();

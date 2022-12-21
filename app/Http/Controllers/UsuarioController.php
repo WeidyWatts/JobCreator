@@ -101,7 +101,16 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $file = $request->image;
+        $name = uniqid(date('HisYmd'));
+        $extension = $file->getClientOriginalExtension();
+        $nameFile = "{$name}.{$extension}";
+        $upload = $file->storeAs('public/user', $nameFile);
+        $usuario = User::find(auth()->user()->id);
+        $usuario->image = $nameFile;
+        $usuario->name = $request->name;
+        $usuario->save();
+        return redirect()->back();
     }
 
     /**

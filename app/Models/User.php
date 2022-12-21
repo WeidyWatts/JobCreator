@@ -27,6 +27,7 @@ class User extends Authenticatable
         'ultimo_acesso',
         'cargo',
         'status',
+        'image',
     ];
 
     /**
