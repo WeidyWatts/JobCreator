@@ -106,26 +106,18 @@
 </x-app-layout>
 
 <div class="modal fade" id="AdicionarJourney" tabindex="-1" aria-labelledby="AdicionarJourneyLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header header-creator">
-                <h5 class="modal-title" id="exampleModalLabel">Adicionar Journey</h5>
+            <div class="modal-header header-creator header header-creator-creator">
+                <h5 class="modal-title" id="exampleModalLabel">Adicionar journey</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fa fa-close"></i> </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('journey.store')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('journey.store')}}" method="POST">
                     @csrf
-                    <div class="mb-3 col-md-10">
-                        <label for="name"  class="form-label">Nome da Journey</label>
-                        <x-text-input id="name" style="width: 100%" type="text" name="name" />
-                    </div>
-                    <div class="mb-3 col-md-10">
-                        <label for="email"  class="form-label">Email</label>
-                        <x-text-input id="email" style="width: 100%" type="text" name="email" />
-                    </div>
-                    <div class="mb-3 col-md-10">
-                        <label for="cargo"  class="form-label">Cargo</label>
-                        <x-text-input id="cargo" style="width: 100%" type="text" name="cargo" />
+                    <div class="mb-3">
+                        <label for="titulo"  class="form-label">Titulo</label>
+                        <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" required />
                     </div>
             </div>
             <div class="modal-footer">

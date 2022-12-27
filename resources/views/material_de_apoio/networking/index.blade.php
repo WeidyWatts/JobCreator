@@ -11,7 +11,7 @@
                             <div class="card">
                                 <div class="flex justify-content-between px-5 py-2">
                                     <a class="text-download" href="@if(isset($networking)){{route('networking.download',$networking)}}@else # @endif">  <i class="fa fa-file mr-2"></i>Modelo de abordagem</a>
-                                    <a href="#" class="text-download ml-3" data-bs-toggle="modal" data-bs-target="#AdicionarNetworking" ><i class="fa fa-pen"></i> </a>
+                                    <a href="#" class="text-download ml-3" data-bs-toggle="modal" data-bs-target="#AdicionarNetworking" >@if(isset($networking))<i class="fa fa-pen"></i> @else <i class="fa fa-upload"></i>@endif </a>
 
                                 </div>
                             </div>
