@@ -3,12 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Journey;
-use App\Models\Journey_Usuario;
 use App\Models\Notificacao;
 
-class JourneyRegistradaController extends Controller
+class NotificacaoController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +14,7 @@ class JourneyRegistradaController extends Controller
      */
     public function index()
     {
-        $journey = Journey::with('users')->paginate(5);
-
-        return view('administracao.journey-registrada.index', ['journeys'=>$journey]);
+        //
     }
 
     /**
@@ -40,24 +35,7 @@ class JourneyRegistradaController extends Controller
      */
     public function store(Request $request)
     {
-      // dd($request);
-
-       foreach($request->usuarios as $usuario) {
-
-           $ju = Journey_Usuario::create([
-                'journey_id'=>$request->journey_id,
-               'user_id'=>$usuario,
-               'percentual_concluido'=> 0
-           ]);
-           Notificacao::create([
-               'notificacao'=> 'Uma Nova Journey foi adicionada para você!',
-               'user_id'=> $usuario,
-               'status'=> 0
-           ]);
-       }
-
-       return redirect()->back();
-
+        //
     }
 
     /**
@@ -65,10 +43,12 @@ class JourneyRegistradaController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        //
+        return Notificacao::where('user_id',$id)->where('status',0)->get();
+
     }
 
     /**
@@ -103,5 +83,21 @@ class JourneyRegistradaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function ver(Request $request){
+
+        $notificacao = Notificacao::where('user_id', $request->user_id)->get();
+        $aux = [];
+        foreach ($notificacao as $no) {
+            $aux[] = $no->id;
+        }
+
+        foreach ($aux as $item) {
+            $noti = Notificacao::find($item);
+            $noti->status = 1;
+            $noti->save();
+        }
+        return '200 success';
     }
 }

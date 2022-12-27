@@ -67,3 +67,10 @@ cursor: pointer;
 .back:hover {
     color: gray;
 }
+
+.notificacao {
+font-size: 2rem;
+}
+.bg-grey{
+    background-color: #dbd6d6;
+}

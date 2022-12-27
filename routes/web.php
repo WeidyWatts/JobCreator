@@ -19,6 +19,7 @@ use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\JourneyRegistradaController;
 use App\Http\Controllers\FavoritosController;
+use App\Http\Controllers\NotificacaoController;
 
 
 /*
@@ -59,6 +60,7 @@ Route::group(['middleware'=>'auth'], function () {
         'usuario'   =>UsuarioController::class,
         'journey-registrada'   =>JourneyRegistradaController::class,
         'favoritos' => FavoritosController::class,
+        'notificacao' => NotificacaoController::class,
 
     ]);
 
@@ -89,6 +91,8 @@ Route::group(['middleware'=>'auth'], function () {
 
     Route::post('central-atendimento', [UsuarioController::class, 'centralAtendimento'])->name('central-atendimento.send');
 
+    Route::post('notificacao/ver', [NotificacaoController::class, 'ver'])
+        ->name('notificacao.ver');
 });
 
 require __DIR__.'/auth.php';
