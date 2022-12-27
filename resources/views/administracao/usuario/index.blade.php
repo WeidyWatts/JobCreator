@@ -65,18 +65,20 @@
                     @csrf
                     <div class="mb-3 col-md-10">
                         <label for="name"  class="form-label">Nome da Usuario</label>
-                        <x-text-input id="name" style="width: 100%" type="text" name="name" required />
+                        <x-text-input id="name" style="width: 100%" type="text" name="name" :value="old('name')" required />
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="email"  class="form-label">Email</label>
-                        <x-text-input id="email" style="width: 100%" type="text" name="email" required/>
+                        <x-text-input id="email" style="width: 100%" type="text" name="email" :value="old('email')" required />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="cargo"  class="form-label">Cargo</label>
 
                         <select class="form-select block w-full mt-1" name="cargo">
                             <option value="gerente">gerente</option>
-                            <option value="membro">membro</option>
+                            <option selected value="membro">membro</option>
                         </select>
                     </div>
             </div>
