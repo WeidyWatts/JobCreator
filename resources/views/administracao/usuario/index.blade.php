@@ -1,3 +1,6 @@
+@php
+    $erro_email = $errors->get('email');
+@endphp
 <x-app-layout>
     <div class="flex justify-content-center mt-5">
         <div class="col-md-10">
@@ -151,3 +154,11 @@
 
     @endforeach
 @endif
+<script>
+    @if($erro_email)
+    var AdicionarUsuario = new bootstrap.Modal(document.getElementById('AdicionarUsuario'), {
+        keyboard: false
+    })
+    AdicionarUsuario.show();
+    @endif
+</script>
