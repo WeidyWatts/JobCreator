@@ -74,3 +74,26 @@ font-size: 2rem;
 .bg-grey{
     background-color: #dbd6d6;
 }
+.faq-titulo {
+    color: #FF7300;
+font-size: x-large;
+}
+
+.faq-sub {
+    color: #FFF;
+    background-color: #FF7300;
+    font-size: large;
+}
+
+.orange {
+    color: #FF7300;
+}
+
+.faq-text {
+
+
+}
+ .white-b-orange {
+     color: #FFF;
+     background-color: #FF7300;
+ }
