@@ -73,7 +73,11 @@
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="cargo"  class="form-label">Cargo</label>
-                        <x-text-input id="cargo" style="width: 100%" type="text" name="cargo" />
+
+                        <select class="form-select block w-full mt-1" name="cargo">
+                            <option value="gerente">gerente</option>
+                            <option value="membro">membro</option>
+                        </select>
                     </div>
             </div>
             <div class="modal-footer">
