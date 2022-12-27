@@ -13,6 +13,6 @@ class Time extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class, 'Usuario_times','time_id', 'user_id')->withPivot(['gerente']);;
+        return $this->belongsToMany(User::class, 'usuario_times','time_id', 'user_id')->withPivot(['gerente']);;
     }
 }
