@@ -16,8 +16,14 @@ class MonitoramentoController extends Controller
     public function index()
     {
           $user = User::with('journey')->paginate(5);
+          $inseridos = User::get();
+          $acessos = User::where('status', 1)->get();
 
-        return view('administracao.monitoramento.index', ['usuarios'=>$user]);
+        $inseridos = count($inseridos);
+        $acessos = count($acessos);
+
+
+        return view('administracao.monitoramento.index', ['usuarios'=>$user, 'inseridos'=> $inseridos, 'acessos'=>$acessos]);
     }
 
     /**
