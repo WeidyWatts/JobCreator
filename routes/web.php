@@ -80,6 +80,7 @@ Route::group(['middleware'=>'auth'], function () {
     Route::get('/getUserTimeJson', [TimesController::class, 'getSelect2Json'])->name('user.time.getJson');
     Route::get('/getUserTimeGerenteJson', [TimesController::class, 'getSelect2JsonGerente'])->name('user.time.getJsonGerente');
     Route::get('/time/user/remove/{user_id}/{time_id}', [TimesController::class,'UserRemove'])->name('time.user.remove');
+    Route::get('/getTimesJson', [TimesController::class, 'TimesToSelect2'])->name('time.getJson');
 
     Route::get('primeiro-acesso', [RegisteredUserController::class, 'PrimeiroAcesso'])
         ->name('primeiro-acesso');

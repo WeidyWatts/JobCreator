@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Journey;
 use App\Models\Journey_Usuario;
+use App\Models\Usuario_time;
 use App\Models\Notificacao;
 
 class JourneyRegistradaController extends Controller
@@ -40,24 +41,43 @@ class JourneyRegistradaController extends Controller
      */
     public function store(Request $request)
     {
-      // dd($request);
 
-       foreach($request->usuarios as $usuario) {
 
-           $ju = Journey_Usuario::create([
-                'journey_id'=>$request->journey_id,
-               'user_id'=>$usuario,
-               'percentual_concluido'=> 0
-           ]);
-           Notificacao::create([
-               'notificacao'=> 'Uma Nova Journey foi adicionada para você!',
-               'user_id'=> $usuario,
-               'status'=> 0
-           ]);
+        if(isset($request->usuarios)) {
+            foreach ($request->usuarios as $usuario) {
+
+                $ju = Journey_Usuario::create([
+                    'journey_id' => $request->journey_id,
+                    'user_id' => $usuario,
+                    'percentual_concluido' => 0
+                ]);
+                Notificacao::create([
+                    'notificacao' => 'Uma Nova Journey foi adicionada para você!',
+                    'user_id' => $usuario,
+                    'status' => 0
+                ]);
+            }
+        }
+//inclusao dinamica de times e Journey
+       if(isset($request->times)) {
+            foreach ($request->times as $time) {
+               $ut = Usuario_time::where('time_id', $time)->get();
+               foreach($ut as $u) {
+                    Journey_Usuario::create([
+                       'journey_id'=>$request->journey_id,
+                       'user_id'=>$u->user_id,
+                       'percentual_concluido'=> 0
+                   ]);
+                   Notificacao::create([
+                       'notificacao'=> 'Uma Nova Journey foi adicionada para você!',
+                       'user_id'=> $u->user_id,
+                       'status'=> 0
+                   ]);
+               }
+           }
        }
 
        return redirect()->back();
-
     }
 
     /**

@@ -168,5 +168,15 @@ class TimesController extends Controller
         return 'Success';
     }
 
+    public function TimesToSelect2() {
+        $data = Time::get();
+        $select2 = [];
+
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->nome];
+        }
+        return response()->json($select2);
+    }
+
 
 }

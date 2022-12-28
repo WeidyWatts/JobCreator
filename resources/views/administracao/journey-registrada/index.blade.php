@@ -145,10 +145,17 @@
                         <form action="{{route('journey-registrada.store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <input type="hidden" name="journey_id" value="{{$journey->id}}">
-                            <div class="my-3 col-md-10">
+                            <div class="my-3">
                                 <span class="ms-1 d-none d-sm-inline">Selecione os usuarios</span>
                                 <br>
                                 <select class="select_user" name="usuarios[]" multiple="multiple" style="width: 100%">
+                                </select>
+                            </div>
+
+                            <div class="my-3">
+                                <span class="ms-1 d-none d-sm-inline">Times</span>
+                                <br>
+                                <select class="select_times" name="times[]" multiple="multiple" style="width: 100%">
                                 </select>
                             </div>
                     </div>
@@ -233,6 +240,21 @@
             placeholder: 'selecione os membros',
             ajax: {
                 url: "{{ URL::to('/getUserTimeJson') }}",
+                processResults: (data) => {
+                    console.log(data)
+                    return {
+                        results: data
+                    };
+                }
+            }
+        });
+    });
+    $(document).ready(()=> {
+        $('.select_times').select2({
+            dropdownParent: $(".modal_vincular_usuario"),
+            placeholder: 'selecione os membros',
+            ajax: {
+                url: "{{ URL::to('/getTimesJson') }}",
                 processResults: (data) => {
                     console.log(data)
                     return {
