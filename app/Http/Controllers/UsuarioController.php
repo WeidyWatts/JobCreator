@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use App\Models\Colaborador_Empresa;
+use App\Models\Empresa;
 use App\Mail\userMail;
 use App\Mail\CentralAtendimentoMail;
 

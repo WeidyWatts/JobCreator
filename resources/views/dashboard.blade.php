@@ -172,19 +172,16 @@ z-index:900;">
                 <div class="d-flex justify-content-start mb-5 mt-2">
                     <div class="faq-text">
                         Os materiais de apoio estão disponíveis dentro da plataforma e você poderá acessá-los a qualquer momento durante a sua jornada. Além de acessar os materiais, você pode baixá-los para utilizar durante o seu processo de recolocação profissional.
-
                     </div>
                 </div>
-                
+            </div>
+
             <div class="modal-footer">
                 <button type="button" class="btn salvar" data-bs-dismiss="modal">OK </button>
             </div>
         </div>
     </div>
 </div>
-
-
-
 <script>
 
     function fac() {
@@ -193,9 +190,4 @@ z-index:900;">
     function mail() {
 
     }
-
-
-
-
-
 </script>

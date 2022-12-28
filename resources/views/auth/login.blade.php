@@ -15,6 +15,7 @@
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha</label>
                         <input type="password" class="form-control input_login" id="password" name="password">
+                        <span onclick="ver_senha()" id="eye" class="fa fa-eye pointer ver-senha"></span>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
                     <div class="mb-3 form-check">
@@ -38,3 +39,15 @@
     </div>
 </x-guest-layout>
 </div>
+
+<script>
+function ver_senha(){
+        if($('#eye').attr('class') == 'fa fa-eye pointer ver-senha') {
+            $('#eye').attr('class', 'fa fa-eye-slash pointer ver-senha');
+            $('#password').attr('type', 'text');
+        }else {
+            $('#eye').attr('class', 'fa fa-eye pointer ver-senha');
+            $('#password').attr('type', 'password');
+        }
+}
+</script>

@@ -12,7 +12,9 @@
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
                                     </div>
                                     <div class="col-md-3">
-                                        <button class="btn mt-2 salvar"  data-bs-toggle="modal" data-bs-target="#AdicionarAnexo">Adicionar Novo</button>
+                                        @if(auth()->user()->user_type != 3)
+                                            <button class="btn mt-2 salvar"  data-bs-toggle="modal" data-bs-target="#AdicionarAnexo">Adicionar Novo</button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -142,29 +144,29 @@
 
 <script>
 
-   function favoritar(id){
+    function favoritar(id){
         console.log($('#anexo'+id).html())
-       if($('#anexo'+id).html() != '<i class="fa fa-star"></i> salvo '){
+        if($('#anexo'+id).html() != '<i class="fa fa-star"></i> salvo '){
 
-           $.ajax({
-               type: "POST",
-               url: "{{ URL::to('/favoritos') }}",
-               data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
-               success: function(){
-                   $('#anexo'+id).html('<i class="fa fa-star"></i> salvo ');
-               }
-           });
-       } else {
-           $.ajax({
-               type: "DELETE",
-               url: "{{ URL::to('/favoritos') }}/"+id,
-               data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
-               success: function(){
-                   $('#anexo'+id).html('<i class="fa-regular fa-star"></i> salvar ');
-               }
-           });
+            $.ajax({
+                type: "POST",
+                url: "{{ URL::to('/favoritos') }}",
+                data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#anexo'+id).html('<i class="fa fa-star"></i> salvo ');
+                }
+            });
+        } else {
+            $.ajax({
+                type: "DELETE",
+                url: "{{ URL::to('/favoritos') }}/"+id,
+                data:  {'tipo': 'anexo', 'item_id': id, '_token': '{{ csrf_token() }}'},
+                success: function(){
+                    $('#anexo'+id).html('<i class="fa-regular fa-star"></i> salvar ');
+                }
+            });
 
-       }
+        }
 
     }
 

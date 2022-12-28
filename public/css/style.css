@@ -32,3 +32,11 @@ body{
     color: #e2e8f0;
     margin-top: 6em;
 }
+
+.ver-senha {
+    position: absolute;
+    top: 11.5rem;
+    right: 2rem;
+    cursor: pointer;
+    font-size: large;
+}

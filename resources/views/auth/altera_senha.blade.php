@@ -14,7 +14,7 @@
             </div>
             <!-- Password -->
             <div class="">
-                <x-input-label for="password" :value="__('Ecolha uma nova senha')" />
+                <x-input-label for="password" :value="__('Escolha uma nova senha')" />
 
                 <x-text-input id="password" class="block mt-1 w-full"
                               type="password"
