@@ -220,8 +220,67 @@ class ModuloController extends Controller
      * @param  \App\Models\Modulo  $Modulo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Modulo $Modulo)
+    public function update(Request $request, $id)
     {
+        switch($request->tipo){
+            case 'anexo':
+
+                foreach($request->anexos as $anexo) {
+                    $anexo_antigo = Anexo_Modulo::where('modulo_id', $id)->where('anexo_id', $anexo)->get();
+                    if(count($anexo_antigo) == 0){
+                        Anexo_Modulo::create([
+                            'modulo_id'=>$id,
+                            'anexo_id'=>$anexo
+                        ]);
+                    }
+                }
+                break;
+            case 'artigo':
+                foreach($request->artigos as $artigo) {
+                    $artigo_antigo = Artigo_Modulo::where('modulo_id', $id)->where('artigo_id', $artigo)->get();
+                    if(count($artigo_antigo) == 0){
+                        Artigo_Modulo::create([
+                            'modulo_id'=>$id,
+                            'artigo_id'=>$artigo
+                        ]);
+                    }
+                }
+                break;
+            case 'link':
+                foreach($request->links as $link) {
+                    $link_antigo = Link_Modulo::where('modulo_id', $id)->where('link_id', $link)->get();
+                    if(count($link_antigo) == 0){
+                        Link_Modulo::create([
+                            'modulo_id'=>$id,
+                            'link_id'=>$link
+                        ]);
+                    }
+                }
+                break;
+            case 'video':
+                foreach($request->videos as $video) {
+                    $video_antigo = Video_Modulo::where('modulo_id', $id)->where('video_id', $video)->get();
+                    if(count($video_antigo) == 0){
+                        Video_Modulo::create([
+                            'modulo_id'=>$id,
+                            'video_id'=>$video
+                        ]);
+                    }
+                }
+                break;
+            case 'teste':
+                foreach($request->testes as $teste) {
+                    $teste_antigo = Teste_Modulo::where('modulo_id', $id)->where('teste_id', $teste)->get();
+                    if(count($teste_antigo) == 0){
+                        Teste_Modulo::create([
+                            'modulo_id'=>$id,
+                            'teste_id'=>$teste
+                        ]);
+                    }
+                }
+                break;
+        }
+
         return redirect()->back();
     }
 
@@ -235,5 +294,29 @@ class ModuloController extends Controller
     {
         $modulo->delete();
         return redirect()->back();
+    }
+
+    public function delete_conteudo(Request $request,$id)
+    {
+
+        switch ($request->tipo){
+            case 'anexo':
+                Anexo_Modulo::where('modulo_id',$request->modulo_id)->where('anexo_id', $request->item_id)->delete();
+                break;
+            case 'artigo':
+                Artigo_Modulo::where('modulo_id',$request->modulo_id)->where('artigo_id', $request->item_id)->delete();
+                break;
+            case 'link':
+                Link_Modulo::where('modulo_id',$request->modulo_id)->where('link_id', $request->item_id)->delete();
+                break;
+            case 'video':
+                Video_Modulo::where('modulo_id',$request->modulo_id)->where('video_id', $request->item_id)->delete();
+                break;
+            case 'teste':
+                Teste_Modulo::where('modulo_id',$request->modulo_id)->where('teste_id', $request->item_id)->delete();
+                break;
+        }
+        return '200 success';
+
     }
 }

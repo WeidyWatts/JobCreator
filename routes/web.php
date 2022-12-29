@@ -93,8 +93,10 @@ Route::group(['middleware'=>'auth'], function () {
 
     Route::post('central-atendimento', [UsuarioController::class, 'centralAtendimento'])->name('central-atendimento.send');
 
-    Route::post('notificacao/ver', [NotificacaoController::class, 'ver'])
-        ->name('notificacao.ver');
+    Route::post('notificacao/ver', [NotificacaoController::class, 'ver']) ->name('notificacao.ver');
+
+    Route::delete('modulo_conteudo/{id}', [ModuloController::class, 'delete_conteudo']) ->name('modulo_conteudo.delete');
+
 });
 
 require __DIR__.'/auth.php';
