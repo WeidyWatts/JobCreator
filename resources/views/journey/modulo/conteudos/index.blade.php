@@ -159,7 +159,7 @@ $(document).ready(()=>{
 
 
 function link(nova){
-    window.location.href = nova;
+    window.open(nova, '_blank');
 }
 
 
