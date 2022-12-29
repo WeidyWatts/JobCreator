@@ -10,13 +10,13 @@
                     <div class="mb-3">
                         <label for="Email" class="form-label">Email</label>
                         <input type="email" class="form-control input_login" name="email" id="Email" aria-describedby="emailHelp">
-                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha</label>
                         <input type="password" class="form-control input_login" id="password" name="password">
                         <span onclick="ver_senha()" id="eye" class="fa fa-eye pointer ver-senha"></span>
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" id="remember_me">
