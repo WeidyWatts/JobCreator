@@ -19,7 +19,7 @@
                                     </div>
                                     <div class="col-md-3">
                                         @if(auth()->user()->user_type != 3)
-                                        <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarartigo">Adicionar Novo</button>
+                                            <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarartigo">Adicionar Novo</button>
                                         @endif
                                     </div>
                                 </div>
@@ -44,23 +44,25 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <a class="mr-2 orange-color" id="artigo{{$artigo->id}}" onclick="favoritar({{$artigo->id}})">@if(in_array($artigo->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
+                                                @if(auth()->user()->user_type != 3)
 
-                                                <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarartigo{{$artigo->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                    <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarartigo{{$artigo->id}}"> <i class="fa fa-check"></i> editar </a>
 
-                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarartigo{{$artigo->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                    <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarartigo{{$artigo->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                @endif
                                             </div>
                                         </div>
                                         <hr>
-                                    </a>
-                                @endforeach
-                                {{ $artigos->links() }}
-                            @endif
+                                        </a>
+                                        @endforeach
+                                        {{ $artigos->links() }}
+                                        @endif
+                                    </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
 </x-app-layout>
 

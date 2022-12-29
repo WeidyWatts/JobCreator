@@ -32,10 +32,12 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <a class="mr-2 orange-color" id="teste{{$teste->id}}" onclick="favoritar({{$teste->id}})">@if(in_array($teste->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
+                                                @if(auth()->user()->user_type != 3)
 
-                                                <a class="action mr-2 orange-color" data-bs-toggle="modal" data-bs-target="#editarteste{{$teste->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                    <a class="action mr-2 orange-color" data-bs-toggle="modal" data-bs-target="#editarteste{{$teste->id}}"> <i class="fa fa-check"></i> editar </a>
 
-                                                <a class="action orange-color" data-bs-toggle="modal" data-bs-target="#deletarteste{{$teste->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                    <a class="action orange-color" data-bs-toggle="modal" data-bs-target="#deletarteste{{$teste->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                @endif
                                             </div>
                                         </div>
                                         <hr>

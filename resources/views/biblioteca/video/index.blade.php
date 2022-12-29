@@ -34,10 +34,13 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <a class="mr-2 orange-color" id="video{{$video->id}}" onclick="favoritar({{$video->id}})">@if(in_array($video->id, $favoritos))<i class="fa fa-star"></i> salvo @else<i class="fa-regular fa-star"></i> salvar @endif</a>
+                                                @if(auth()->user()->user_type != 3)
 
-                                                <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarvideo{{$video->id}}"> <i class="fa fa-check"></i> editar </a>
+                                                    <a class="orange-color mr-2" data-bs-toggle="modal" data-bs-target="#editarvideo{{$video->id}}"> <i class="fa fa-check"></i> editar </a>
 
-                                                <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarvideo{{$video->id}}"><i class="fa fa-trash"></i> excluir </a>
+                                                    <a class="orange-color" data-bs-toggle="modal" data-bs-target="#deletarvideo{{$video->id}}"><i class="fa fa-trash"></i> excluir </a>
+
+                                                @endif
                                             </div>
                                         </div>
                                         <hr>
