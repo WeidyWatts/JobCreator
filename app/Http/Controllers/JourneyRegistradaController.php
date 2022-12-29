@@ -60,25 +60,25 @@ class JourneyRegistradaController extends Controller
             }
         }
 //inclusao dinamica de times e Journey
-       if(isset($request->times)) {
+        if(isset($request->times)) {
             foreach ($request->times as $time) {
-               $ut = Usuario_time::where('time_id', $time)->get();
-               foreach($ut as $u) {
+                $ut = Usuario_time::where('time_id', $time)->get();
+                foreach($ut as $u) {
                     Journey_Usuario::create([
-                       'journey_id'=>$request->journey_id,
-                       'user_id'=>$u->user_id,
-                       'percentual_concluido'=> 0
-                   ]);
-                   Notificacao::create([
-                       'notificacao'=> 'Uma Nova Journey foi adicionada para você!',
-                       'user_id'=> $u->user_id,
-                       'status'=> 0
-                   ]);
-               }
-           }
-       }
+                        'journey_id'=>$request->journey_id,
+                        'user_id'=>$u->user_id,
+                        'percentual_concluido'=> 0
+                    ]);
+                    Notificacao::create([
+                        'notificacao'=> 'Uma Nova Journey foi adicionada para você!',
+                        'user_id'=> $u->user_id,
+                        'status'=> 0
+                    ]);
+                }
+            }
+        }
 
-       return redirect()->back();
+        return redirect()->back();
     }
 
     /**
@@ -112,15 +112,18 @@ class JourneyRegistradaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
         $modulos = Modulo::where('journey_id', $request->journey_id)->get();
         $modulos = count($modulos);
 
         $percent = 100/$modulos;
 
-        $ju = Journey_Usuario::where('journey_id', '$request->journey_id')->where('user_id', $id)->first();
+        $ju = Journey_Usuario::where('journey_id', $request->journey_id)->where('user_id', $id)->get();
 
-        $ju->percentual_concluido +=  $percent;
+        if($ju) {
+            $ju->percentual_concluido +=  $percent;
+            $ju->save();
+        }
+
 
         return redirect()->route('journey.index');
 
