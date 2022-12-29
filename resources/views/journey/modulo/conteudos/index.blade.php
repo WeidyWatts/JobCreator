@@ -14,10 +14,12 @@
                                     <div class="flex-item">
                                         <a class="nav-link px-0 align-middle">
                                             Anexos </a>
-                                        <ul class="collapse  ml-5" id="dropAnexo" data-bs-parent="#menu1">
+                                        <ul class="collapse ml-5 item" id="dropAnexo" data-bs-parent="#menu1">
                                             @foreach($anexos as $anexo)
                                                 <li>
+                                                    <div class="teste" onclick="link('{{route('anexo.download',$anexo->arquivo_anexo)}}')">
                                                     <a href="{{route('anexo.download',$anexo->arquivo_anexo)}}"> &bull; {{$anexo->titulo}} </a>
+                                                    </div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -34,7 +36,9 @@
                                         <ul class="collapse  ml-5" id="dropArtigo" data-bs-parent="#menu1">
                                             @foreach($artigos as $artigo)
                                                 <li>
+                                                    <div class="teste" onclick="link('{{$artigo->link}}')">
                                                     <a href="{{$artigo->link}}" target="_blank"> &bull; {{$artigo->titulo}} </a>
+                                                    </div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -52,7 +56,9 @@
                                         <ul class="collapse  ml-5" id="dropLink" data-bs-parent="#menu1">
                                             @foreach($links as $link)
                                                 <li>
+                                                    <div class="teste" onclick="link('{{$link->link}}')">
                                                     <a href="{{$link->link}}" target="_blank"> &bull; {{$link->titulo}} </a>
+                                                    </div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -87,7 +93,10 @@
                                         <ul class="collapse  ml-5" id="dropTeste" data-bs-parent="#menu1">
                                             @foreach($testes as $teste)
                                                 <li>
+                                                    <div class="teste" onclick="link('{{$teste->link}}')">
+
                                                     <a href="{{$teste->link}}"> &bull; {{$teste->titulo}} </a>
+                                                    </div>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -137,3 +146,23 @@
         </div>
     @endforeach
 @endif
+
+<script>
+
+
+$(document).ready(()=>{
+       $(document).on('click', '.flex-item', function(event){
+           console.log(event)
+           event.stopPropagation();
+       });
+   })
+
+
+function link(nova){
+    window.location.href = nova;
+}
+
+
+
+
+</script>
