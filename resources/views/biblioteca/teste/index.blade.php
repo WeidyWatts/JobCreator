@@ -10,7 +10,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
-                                    </div>
+                                    </div>|
                                     <div class="col-md-3">
                                         @if(auth()->user()->user_type != 3)
                                             <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarteste">Adicionar Novo</button>
@@ -69,12 +69,12 @@
                     </div>
 
                     <div class="flex-row">
-                        <label for="descricao"  class="form-label">Descricao </label>
+                        <label for="descricao"  class="form-label">Descrição </label>
                         <x-text-input id="descricao" style="width: 100%" type="text" name="descricao"  />
                     </div>
 
                     <div class="flex-row">
-                        <label for="descricao"  class="form-label">Link </label>
+                        <label for="link"  class="form-label">Link </label>
                         <x-text-input id="link" style="width: 100%" type="text" name="link"  />
                     </div>
 
@@ -106,12 +106,12 @@
                                 <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$teste->titulo}}" />
                             </div>
                             <div class="flex-row">
-                                <label for="descricao"  class="form-label">Descricao </label>
+                                <label for="descricao"  class="form-label">Descrição </label>
                                 <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$teste->descricao}}" />
                             </div>
                             <div class="flex-row">
-                                <label for="descricao"  class="form-label">Link </label>
-                                <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$teste->link}}" />
+                                <label for="link"  class="form-label">Link </label>
+                                <x-text-input id="link" style="width: 100%" type="text" name="link" value="{{$teste->link}}" />
                             </div>
                     </div>
                     <div class="modal-footer">

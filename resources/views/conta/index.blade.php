@@ -30,6 +30,8 @@
                                 <label for="nome" class="form-label">Nome</label>
                                 <x-text-input id="name" type="text" name="name" value="{{Auth::user()->name}}" required />
                             </div>
+
+                            <button type="button" class="btn btn-warning" onclick="alterar_senha()">alterar senha</button>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success">Salvar</button>
                             </div>

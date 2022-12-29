@@ -100,19 +100,25 @@ class TimesController extends Controller
 
         $atual = Usuario_time::where('time_id', $time->id)->get();
         $novo = $request->membros;
-        foreach ($atual as $item) {
-            foreach ($novo as $k => $v){
-                if($item->user_id == $v){
-                    unset($novo[$k]);
+        if(isset($atual)) {
+            foreach ($atual as $item) {
+                if(isset($novo)) {
+                    foreach ($novo as $k => $v) {
+                        if ($item->user_id == $v) {
+                            unset($novo[$k]);
+                        }
+                    }
                 }
             }
         }
-        foreach ($novo as $user) {
-            Usuario_time::create([
-                'user_id'   =>$user,
-                'time_id'   =>$time->id,
-                'gerente'   =>0
-            ]);
+        if(isset($novo)) {
+            foreach ($novo as $user) {
+                Usuario_time::create([
+                    'user_id' => $user,
+                    'time_id' => $time->id,
+                    'gerente' => 0
+                ]);
+            }
         }
 
         if(isset($request->gerente)){
@@ -144,7 +150,7 @@ class TimesController extends Controller
     }
 
     public function getSelect2Json() {
-        $data = User::get();
+        $data = User::where('cargo', '<>', 'gerente')->get();
         foreach ($data as $item) {
             $select2[] = ['id'=>$item->id, 'text' =>$item->name];
         }

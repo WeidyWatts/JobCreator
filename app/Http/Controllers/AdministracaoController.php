@@ -45,6 +45,7 @@ class AdministracaoController extends Controller
         $request->validate([
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
         ]);
+        $request->cnpj = preg_replace('/[^a-z0-9]/i','', $request->cnpj);
 
         $user = User::create([
             'name' => $request->name_empresa,
@@ -95,9 +96,16 @@ class AdministracaoController extends Controller
      * @param  \App\Models\Empresa  $empresa
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Empresa $empresa)
+    public function update(Request $request, $id)
     {
-        //
+        $empresa = Empresa::find($id);
+        $request->cnpj = preg_replace('/[^a-z0-9]/i','', $request->cnpj);
+
+        $empresa->nome_empresa = $request->name_empresa;
+        $empresa->cnpj = $request->cnpj;
+        $empresa->save();
+
+        return redirect()->back();
     }
 
     /**

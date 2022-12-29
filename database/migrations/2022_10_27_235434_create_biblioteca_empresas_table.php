@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('biblioteca_empresas', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empresa_id');
-            $table->foreign('empresa_id')->references('id')->on('empresas');
+            $table->foreign('empresa_id')->references('id')->on('empresas')->onDelete('cascade')->onUpdate('cascade');;
             $table->unsignedBigInteger('biblioteca_id');
-            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas');
+            $table->foreign('biblioteca_id')->references('id')->on('bibliotecas')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }

@@ -34,7 +34,7 @@
                                     @foreach($empresas as $empresa)
                                         <tr>
                                             <td>{{$empresa->nome_empresa}}</td>
-                                            <td>{{$empresa->cnpj}}</td>
+                                            <td class="cnpj-read">{{$empresa->cnpj}}</td>
                                             <td><i class="fa fa-file pointer"  data-bs-toggle="modal" data-bs-target="#RelatorioEmpresa{{$empresa->id}}" onclick="relatorio({{$empresa->id}})"  aria-hidden="true"></i></td>
                                             <td>{{$empresa->status}}</td>
                                             <td>
@@ -72,7 +72,7 @@
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="cnpj"  class="form-label">CNPJ</label>
-                        <x-text-input id="cnpj" style="width: 100%" type="text" name="cnpj" :value="old('cnpj')" required />
+                        <x-text-input  class="cnpj-add" style="width: 100%" type="text" name="cnpj" :value="old('cnpj')" min="1" max="14" required />
                     </div>
                     <div class="mb-3 col-md-10">
                         <label for="email"  class="form-label">Email do Responsável</label>
@@ -109,7 +109,7 @@
                             </div>
                             <div class="mb-3 ">
                                 <label for="cnpj"  class="form-label">CNPJ</label>
-                                <x-text-input id="cnpj" style="width: 100%" type="text" name="cnpj" value="{{$empresa->cnpj}}" required/>
+                                <x-text-input class="cnpj-upd" style="width: 100%" type="text" name="cnpj" value="{{$empresa->cnpj}}" required/>
                             </div>
                     </div>
                     <div class="modal-footer">
@@ -179,7 +179,7 @@
     @endforeach
 @endif
 
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.js"></script>
 <script>
 
     @if($erro_email)
@@ -188,6 +188,13 @@
     })
     AdicionarEmpresa.show();
     @endif
+
+
+    $(document).ready(()=>{
+        $('.cnpj-add').mask("99.999.999/9999-99");
+        $('.cnpj-upd').mask("99.999.999/9999-99");
+        $('.cnpj-read').mask("99.999.999/9999-99");
+    })
 
 
     function relatorio(empresa_id) {

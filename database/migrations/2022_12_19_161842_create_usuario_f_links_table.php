@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('usuario_f_links', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
             $table->unsignedBigInteger('link_id');
-            $table->foreign('link_id')->references('id')->on('links');
+            $table->foreign('link_id')->references('id')->on('links')->onDelete('cascade')->onUpdate('cascade');;
             $table->timestamps();
         });
     }

@@ -67,7 +67,7 @@
                 <form action="{{route('usuario.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3 col-md-10">
-                        <label for="name"  class="form-label">Nome da Usuario</label>
+                        <label for="name"  class="form-label">Nome do usuário</label>
                         <x-text-input id="name" style="width: 100%" type="text" name="name" :value="old('name')" required />
                     </div>
                     <div class="mb-3 col-md-10">

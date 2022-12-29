@@ -69,12 +69,12 @@
                         <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" />
                     </div>
                     <div class="mb-3 col-md-10">
-                        <label for="link"  class="form-label">Link</label>
-                        <x-text-input id="link" style="width: 100%" type="text" name="link" />
-                    </div>
-                    <div class="mb-3 col-md-10">
                         <label for="descricao"  class="form-label">Descrição </label>
                         <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" />
+                    </div>
+                    <div class="mb-3 col-md-10">
+                        <label for="link"  class="form-label">Link</label>
+                        <x-text-input id="link" style="width: 100%" type="text" name="link" />
                     </div>
             </div>
             <div class="modal-footer">
@@ -104,12 +104,12 @@
                                 <x-text-input id="titulo" style="width: 100%" type="text" name="titulo" value="{{$video->titulo}}" />
                             </div>
                             <div class="mb-3 col-md-10">
-                                <label for="link"  class="form-label">Link </label>
-                                <x-text-input id="link" style="width: 100%" type="text" name="link" value="{{$video->link}}" />
+                                <label for="descricao"  class="form-label">Descrição </label>
+                                <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$video->descricao}}" />
                             </div>
                             <div class="mb-3 col-md-10">
-                                <label for="descricao"  class="form-label">Descricao </label>
-                                <x-text-input id="descricao" style="width: 100%" type="text" name="descricao" value="{{$video->descricao}}" />
+                                <label for="link"  class="form-label">Link </label>
+                                <x-text-input id="link" style="width: 100%" type="text" name="link" value="{{$video->link}}" />
                             </div>
                     </div>
                     <div class="modal-footer">

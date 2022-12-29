@@ -26,9 +26,7 @@ class ContaController extends Controller
      */
     public function create()
     {
-        $mail = Mail::to('h.braga16@gmail.com')->send(new userMail());
-
-        return $mail;
+            //
     }
 
     /**

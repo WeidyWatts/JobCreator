@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('notificacao');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');;
             $table->tinyInteger('status')->default(0);  // 0- pendente  // 1 - lida
             $table->timestamps();
         });
