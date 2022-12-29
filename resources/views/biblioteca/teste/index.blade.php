@@ -10,7 +10,7 @@
                                 <div class="row">
                                     <div class="col-md-9">
                                         <x-text-input id="search" class="block my-2" style="width: 100%" type="text" name="search" placeholder=" Pesquise por um titulo ou palavra chave..." />
-                                    </div>|
+                                    </div>
                                     <div class="col-md-3">
                                         @if(auth()->user()->user_type != 3)
                                             <button class="btn salvar mt-2" data-bs-toggle="modal" data-bs-target="#Adicionarteste">Adicionar Novo</button>
