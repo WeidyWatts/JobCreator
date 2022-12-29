@@ -18,7 +18,7 @@
                                             @foreach($anexos as $anexo)
                                                 <li>
                                                     <div class="teste" onclick="link('{{route('anexo.download',$anexo->arquivo_anexo)}}')">
-                                                    <a href="{{route('anexo.download',$anexo->arquivo_anexo)}}"> &bull; {{$anexo->titulo}} </a>
+                                                        <a href="{{route('anexo.download',$anexo->arquivo_anexo)}}"> &bull; {{$anexo->titulo}} </a>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -37,7 +37,7 @@
                                             @foreach($artigos as $artigo)
                                                 <li>
                                                     <div class="teste" onclick="link('{{$artigo->link}}')">
-                                                    <a href="{{$artigo->link}}" target="_blank"> &bull; {{$artigo->titulo}} </a>
+                                                        <a href="{{$artigo->link}}" target="_blank"> &bull; {{$artigo->titulo}} </a>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -57,7 +57,7 @@
                                             @foreach($links as $link)
                                                 <li>
                                                     <div class="teste" onclick="link('{{$link->link}}')">
-                                                    <a href="{{$link->link}}" target="_blank"> &bull; {{$link->titulo}} </a>
+                                                        <a href="{{$link->link}}" target="_blank"> &bull; {{$link->titulo}} </a>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -95,7 +95,7 @@
                                                 <li>
                                                     <div class="teste" onclick="link('{{$teste->link}}')">
 
-                                                    <a href="{{$teste->link}}"> &bull; {{$teste->titulo}} </a>
+                                                        <a href="{{$teste->link}}"> &bull; {{$teste->titulo}} </a>
                                                     </div>
                                                 </li>
                                             @endforeach
@@ -105,18 +105,14 @@
 
                                 </li>
 
-
-
-
-
-
-
-
-
                             </ul>
+                            <div class="d-flex justify-content-end mt-3">
+                                <button class="btn btn-primary">Concluir</button>
 
+                            </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -150,17 +146,17 @@
 <script>
 
 
-$(document).ready(()=>{
-       $(document).on('click', '.flex-item', function(event){
-           console.log(event)
-           event.stopPropagation();
-       });
-   })
+    $(document).ready(()=>{
+        $(document).on('click', '.flex-item', function(event){
+            console.log(event)
+            event.stopPropagation();
+        });
+    })
 
 
-function link(nova){
-    window.open(nova, '_blank');
-}
+    function link(nova){
+        window.open(nova, '_blank');
+    }
 
 
 
