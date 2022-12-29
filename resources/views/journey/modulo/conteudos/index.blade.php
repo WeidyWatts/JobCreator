@@ -107,7 +107,15 @@
 
                             </ul>
                             <div class="d-flex justify-content-end mt-3">
-                                <button class="btn btn-primary">Concluir</button>
+                                <a href="">
+
+                                    <form action="{{route('journey-registrada.update',auth()->user()->id)}}" method="POST">
+                                        @method('PUT')
+                                        @csrf
+                                        <input type="hidden" name="journey_id" value="{{$journey_id}}">
+                                        <button type="submit" class="btn btn-primary">Concluir</button>
+                                    </form>
+                                    </a>
 
                             </div>
 

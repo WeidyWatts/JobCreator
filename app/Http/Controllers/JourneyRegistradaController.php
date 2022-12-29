@@ -8,6 +8,7 @@ use App\Models\Journey;
 use App\Models\Journey_Usuario;
 use App\Models\Usuario_time;
 use App\Models\Notificacao;
+use App\Models\Modulo;
 
 class JourneyRegistradaController extends Controller
 {
@@ -111,7 +112,20 @@ class JourneyRegistradaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
+        $modulos = Modulo::where('journey_id', $request->journey_id)->get();
+        $modulos = count($modulos);
+
+        $percent = 100/$modulos;
+
+        $ju = Journey_Usuario::where('journey_id', '$request->journey_id')->where('user_id', $id)->first();
+
+        $ju->percentual_concluido +=  $percent;
+
+        return redirect()->route('journey.index');
+
+
+
     }
 
     /**

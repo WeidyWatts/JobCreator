@@ -196,7 +196,8 @@ class ModuloController extends Controller
                 'artigos'   =>$artigo,
                 'links'     =>$link,
                 'videos'    =>$video,
-                'testes'    =>$teste
+                'testes'    =>$teste,
+                'journey_id'=>$modulo->journey_id
             ]);
 
     }
