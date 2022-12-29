@@ -17,7 +17,7 @@
                                         <ul class="collapse  ml-5" id="dropAnexo" data-bs-parent="#menu1">
                                             @foreach($anexos as $anexo)
                                                 <li>
-                                                    <a href="{{route('anexo.download',$anexo->arquivo_anexo)}}" target="_blank"> &bull; {{$anexo->titulo}} </a>
+                                                    <a href="{{route('anexo.download',$anexo->arquivo_anexo)}}"> &bull; {{$anexo->titulo}} </a>
                                                 </li>
                                             @endforeach
                                         </ul>
@@ -77,8 +77,6 @@
                                     <span class="badge bg-primary rounded-pill">{{count($videos)}}</span>
 
                                 </li>
-
-
 
 
 
