@@ -31,7 +31,7 @@
                                 <x-text-input id="name" type="text" name="name" value="{{Auth::user()->name}}" required />
                             </div>
 
-                            <button type="button" class="btn btn-warning" onclick="alterar_senha()">alterar senha</button>
+                           <a href="{{route('primeiro-acesso')}}"> <button type="button" class="btn btn-warning" >alterar senha</button></a>
                             <div class="d-flex justify-content-end">
                                 <button type="submit" class="btn btn-success">Salvar</button>
                             </div>
