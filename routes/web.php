@@ -78,6 +78,7 @@ Route::group(['middleware'=>'auth'], function () {
     Route::get('/entrevistaDownload/{filename}',[EntrevistaController::class, 'download'])->name('entrevista.download');
     Route::get('/networkingDownload/{filename}',[NetworkingController::class, 'download'])->name('networking.download');
     Route::get('/getUserTimeJson', [TimesController::class, 'getSelect2Json'])->name('user.time.getJson');
+    Route::get('/getUserJson', [TimesController::class, 'getSelect2JsonAll'])->name('user.getJson');
     Route::get('/getUserTimeGerenteJson', [TimesController::class, 'getSelect2JsonGerente'])->name('user.time.getJsonGerente');
     Route::get('/time/user/remove/{user_id}/{time_id}', [TimesController::class,'UserRemove'])->name('time.user.remove');
     Route::get('/getTimesJson', [TimesController::class, 'TimesToSelect2'])->name('time.getJson');

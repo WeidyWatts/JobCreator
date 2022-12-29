@@ -239,7 +239,7 @@
             dropdownParent: $(".modal_vincular_usuario"),
             placeholder: 'selecione os membros',
             ajax: {
-                url: "{{ URL::to('/getUserTimeJson') }}",
+                url: "{{ URL::to('/getUserJson') }}",
                 processResults: (data) => {
                     console.log(data)
                     return {

@@ -156,6 +156,13 @@ class TimesController extends Controller
         }
         return response()->json($select2);
     }
+    public function getSelect2JsonAll() {
+        $data = User::where('cargo', 'gerente')->get();
+        foreach ($data as $item) {
+            $select2[] = ['id'=>$item->id, 'text' =>$item->name];
+        }
+        return response()->json($select2);
+    }
 
 
     public function getSelect2JsonGerente() {

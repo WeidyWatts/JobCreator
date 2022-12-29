@@ -117,11 +117,9 @@ class JourneyRegistradaController extends Controller
 
         $percent = 100/$modulos;
 
-        $ju = Journey_Usuario::where('journey_id', $request->journey_id)->where('user_id', $id)->get();
-
-
-        if(count($ju) > 0) {
-            $ju->percentual_concluido +=  $percent;
+        $ju = Journey_Usuario::where('journey_id', $request->journey_id)->where('user_id', $id)->first();
+        if($ju) {
+            $ju->percentual_concluido += $percent;
             $ju->save();
         }
 
