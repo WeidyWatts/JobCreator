@@ -9,6 +9,7 @@
                 <div class="card-body flex justify-content-center">
                     <div class="col-md-10">
                         <div class="card p-3">
+                            <div class="card-body">
                             <div id="instrumentos" class="mb-4" >
                                 <div class="row">
                                     <div class="col-md-9">
@@ -20,7 +21,7 @@
                                 </div>
                             </div>
                             @if(count($usuarios)>0)
-                                <table class="table table-striped">
+                                <table class="table table-striped table-sm">
                                     <thead>
                                     <tr>
                                         <th scope="col">Empresa</th>
@@ -36,9 +37,8 @@
                                     @foreach($usuarios as $usuario)
                                         <tr>
                                             <td>
-                                            @foreach($usuario->empresa as $empresa)
-                                                {{$empresa->nome_empresa}}
-
+                                                @foreach($usuario->empresa as $empresa)
+                                                    {{$empresa->nome_empresa}}
                                                 @endforeach
                                             </td>
                                             <td>{{$usuario->name}}</td>
@@ -54,6 +54,7 @@
                                     </tbody>
                                 </table>
                             @endif
+                        </div>
                         </div>
                     </div>
                 </div>
