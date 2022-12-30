@@ -53,4 +53,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Journey::class, 'journey__usuarios','user_id', 'journey_id')->withPivot(['percentual_concluido']);
     }
+
+    public function empresa()
+    {
+        return $this->belongsToMany(Empresa::class, 'colaborador__empresas','user_id', 'empresa_id');
+    }
 }

@@ -40,7 +40,7 @@ class UsuarioController extends Controller
                 }
 
         } else {
-            $user = User::paginate(10);
+            $user = User::with('empresa')->paginate(10);
         }
         return view('administracao.usuario.index', ['usuarios'=>$user]);
     }

@@ -23,6 +23,7 @@
                                 <table class="table table-striped">
                                     <thead>
                                     <tr>
+                                        <th scope="col">Empresa</th>
                                         <th scope="col">Nome</th>
                                         <th scope="col">Email</th>
                                         <th scope="col">Ultimo Acesso</th>
@@ -34,6 +35,12 @@
                                     <tbody>
                                     @foreach($usuarios as $usuario)
                                         <tr>
+                                            <td>
+                                            @foreach($usuario->empresa as $empresa)
+                                                {{$empresa->nome_empresa}}
+
+                                                @endforeach
+                                            </td>
                                             <td>{{$usuario->name}}</td>
                                             <td>{{$usuario->email}}</td>
                                             <td> {{$usuario->ultimo_acesso ? Carbon\Carbon::parse($usuario->ultimo_acesso)->format('d/m/Y') : '--'}}   </td>
