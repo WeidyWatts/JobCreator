@@ -22,7 +22,25 @@ class UsuarioController extends Controller
      */
     public function index()
     {
-        $user = User::paginate(10);
+
+
+        if(auth()->user()->user_type == 2){
+                $aux = [];
+                $colaboradores = Colaborador_Empresa::where('empresa_id', auth()->user()->id)->get();
+
+                if(count($colaboradores) > 0){
+                    foreach ($colaboradores as $colaborador){
+                        $aux[] = $colaborador->user_id;
+                    }
+                }
+
+                if(is_array($aux)){
+                    $user = User::whereIn('id',$aux)->paginate(10);
+                }
+
+        } else {
+            $user = User::paginate(10);
+        }
         return view('administracao.usuario.index', ['usuarios'=>$user]);
     }
 
