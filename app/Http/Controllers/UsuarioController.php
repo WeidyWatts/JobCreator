@@ -26,7 +26,8 @@ class UsuarioController extends Controller
 
         if(auth()->user()->user_type == 2){
                 $aux = [];
-                $colaboradores = Colaborador_Empresa::where('empresa_id', auth()->user()->id)->get();
+                $empresa = Empresa::where('user_id',auth()->user()->id)->first();
+                $colaboradores = Colaborador_Empresa::where('empresa_id', $empresa->id)->get();
 
                 if(count($colaboradores) > 0){
                     foreach ($colaboradores as $colaborador){
